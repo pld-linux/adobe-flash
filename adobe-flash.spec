@@ -45,7 +45,7 @@ This package contains flash plugin for Mozilla Firefox browser.
 
 %description -n mozilla-firefox-plugin-macromedia-flash -l pl
 Pakiet zawiera wtyczkê dla technologii Flash dla przegl±darki
-Mozilla Firefox
+Mozilla Firefox.
 
 %package -n konqueror-plugin-macromedia-flash
 Summary:	Flash plugin for konqueror based browser
