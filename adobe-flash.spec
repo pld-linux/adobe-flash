@@ -15,6 +15,8 @@ URL:		http://www.macromedia.com/software/flash/
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_prefix		/usr/X11R6
+
 %description
 Flash plugin for Netscape-compatible WWW browsers.
 
