@@ -4,18 +4,16 @@
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape
 Name:		macromedia-flash
-Version:	6.0r79
-Release:	4
+Version:	6.0r81
+Release:	1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 Source0:	http://download.macromedia.com/pub/shockwave/flash/english/linux/%{version}/install_flash_player_6_linux.tar.gz
-# NoSource0-md5: a6f73da96f89d3dba4fadd4020dd7f38
+# NoSource0-md5:	3de1fafb338dd82f1de596e8a3b31344
 NoSource:	0
 URL:		http://www.macromedia.com/software/flash/
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_noautoreqdep		libstdc++-libc6.2-2.so.3
 
 %description
 Flash plugin for Netscape-compatible WWW browsers.
@@ -28,7 +26,6 @@ Summary:	Flash plugin for Mozilla based browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek opartych na Mozilli
 Group:		X11/Applications/Multimedia
 PreReq:		mozilla-embedded >= 1.0
-Requires:	compat-libstdc++-2.10
 Obsoletes:	flash-plugin
 
 %description -n mozilla-plugin-macromedia-flash
@@ -44,7 +41,6 @@ Summary:	Flash plugin for konqueror based browser
 Summary(pl):	Wtyczka obs³uguj±ca Flash dla przegl±darek opartych na konquerorze
 Group:		X11/Applications/Multimedia
 PreReq:		konqueror >= 3.0.8-2.3
-Requires:	compat-libstdc++-2.10
 Obsoletes:	flash-plugin
 
 %description -n konqueror-plugin-macromedia-flash
