@@ -6,7 +6,7 @@ Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape
 Name:		macromedia-flash
 Version:	6.0r79
-Release:	2
+Release:	4
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 Source0:	http://download.macromedia.com/pub/shockwave/flash/english/linux/%{version}/install_flash_player_6_linux.tar.gz
@@ -17,6 +17,7 @@ ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
+%define		kde_libdir	/usr/lib
 
 %description
 Flash plugin for Netscape-compatible WWW browsers.
@@ -44,7 +45,7 @@ na Mozilli, np.: mozilli jako takiej, galeona czy te¿ skipstone'a.
 Summary:	Flash plugin for konqueror based browser
 Summary(pl):	Wtyczka obs³uguj±ca Flash dla przegl±darek opartych na konquerorze
 Group:		X11/Applications/Multimedia
-PreReq:		konqueror >= 3.0.8-2.3
+PreReq:		konqueror >= 3.1
 Requires:	compat-libstdc++-2.10
 Obsoletes:	flash-plugin
 
@@ -62,10 +63,11 @@ netraidera.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_libdir}/{mozilla/plugins,/kde3/plugins/konqueror}
+install -d $RPM_BUILD_ROOT%{_libdir}/{mozilla/plugins \
+	$RPM_BUILD_ROOT%{kde_libdir}/kde3/plugins/konqueror
 
 install *.{so,xpt} $RPM_BUILD_ROOT%{_libdir}/mozilla/plugins
-install *.so $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/konqueror
+install *.so $RPM_BUILD_ROOT%{kde_libdir}/kde3/plugins/konqueror
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -87,4 +89,4 @@ MOZILLA_FIVE_HOME=%{_libdir}/mozilla %{_bindir}/regxpcom
 
 %files -n konqueror-plugin-macromedia-flash
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde3/plugins/konqueror/*.so
+%attr(755,root,root) %{kde_libdir}/kde3/plugins/konqueror/*.so
