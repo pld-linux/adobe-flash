@@ -10,6 +10,7 @@ Release:	2
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 Source0:	http://download.macromedia.com/pub/shockwave/flash/english/linux/%{version}/install_flash_player_6_linux.tar.gz
+# Source0-md5:	a6f73da96f89d3dba4fadd4020dd7f38
 NoSource:	0
 URL:		http://www.macromedia.com/
 ExclusiveArch:	%{ix86}
