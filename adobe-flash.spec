@@ -1,6 +1,3 @@
-#
-# Conditional build:
-#
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape
 Name:		macromedia-flash
@@ -36,6 +33,20 @@ mozilla itself, galeon or skipstone.
 Pakiet zawiera wtyczkê dla technologii Flash dla przegl±darek opartych
 na Mozilli, np.: mozilli jako takiej, galeona czy te¿ skipstone'a.
 
+%package -n mozilla-firefox-plugin-macromedia-flash
+Summary:	Flash plugin for Mozilla Firefox browser
+Summary(pl):	Wtyczka Flash dla Mozilla Firefox
+Group:		X11/Applications/Multimedia
+PreReq:		mozilla-firefox
+Obsoletes:	flash-plugin
+
+%description -n mozilla-firefox-plugin-macromedia-flash
+This package contains flash plugin for Mozilla Firefox browser.
+
+%description -n mozilla-firefox-plugin-macromedia-flash -l pl
+Pakiet zawiera wtyczkê dla technologii Flash dla przegl±darki
+Mozilla Firefox
+
 %package -n konqueror-plugin-macromedia-flash
 Summary:	Flash plugin for konqueror based browser
 Summary(pl):	Wtyczka obs³uguj±ca Flash dla przegl±darek opartych na konquerorze
@@ -57,9 +68,10 @@ netraidera.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_libdir}/{mozilla/plugins,/kde3/plugins/konqueror}
+install -d $RPM_BUILD_ROOT%{_libdir}/{mozilla/plugins,/mozilla-firefox/plugins,/kde3/plugins/konqueror}
 
 install *.{so,xpt} $RPM_BUILD_ROOT%{_libdir}/mozilla/plugins
+install *.{so,xpt} $RPM_BUILD_ROOT%{_libdir}/mozilla-firefox/plugins
 install *.so $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/konqueror
 
 %clean
@@ -83,6 +95,11 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/mozilla/plugins/*.so
 %{_libdir}/mozilla/plugins/*.xpt
+
+%files -n mozilla-firefox-plugin-macromedia-flash
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/mozilla-firefox/plugins/*.so
+%{_libdir}/mozilla-firefox/plugins/*.xpt
 
 %files -n konqueror-plugin-macromedia-flash
 %defattr(644,root,root,755)
