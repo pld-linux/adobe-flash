@@ -12,7 +12,6 @@ Source0:	http://download.macromedia.com/pub/shockwave/flash/english/linux/%{vers
 # NoSource0-md5: a6f73da96f89d3dba4fadd4020dd7f38
 NoSource:	0
 URL:		http://www.macromedia.com/software/flash/
-BuildRequires:	compat-libstdc++-2.10
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
