@@ -1,6 +1,5 @@
 #
 # Conditional build:
-# _with_ra			- build in RA environment
 #
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape
@@ -16,10 +15,6 @@ URL:		http://www.macromedia.com/software/flash/
 BuildRequires:	compat-libstdc++-2.10
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%if 0%{?_with_ra:1}
-%define		_prefix		/usr/X11R6
-%endif
 
 %description
 Flash plugin for Netscape-compatible WWW browsers.
