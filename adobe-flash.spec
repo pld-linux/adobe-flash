@@ -5,7 +5,7 @@ Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape
 Name:		macromedia-flash
 Version:	6.0r79
-Release:	3
+Release:	4
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 Source0:	http://download.macromedia.com/pub/shockwave/flash/english/linux/%{version}/install_flash_player_6_linux.tar.gz
