@@ -72,12 +72,16 @@ rm -rf $RPM_BUILD_ROOT
 %post -n mozilla-plugin-macromedia-flash
 umask 022
 rm -f %{_libdir}/mozilla/components/{compreg,xpti}.dat
-MOZILLA_FIVE_HOME=%{_libdir}/mozilla %{_bindir}/regxpcom
+if [ -x %{_bindir}/regxpcom ]; then
+	MOZILLA_FIVE_HOME=%{_libdir}/mozilla %{_bindir}/regxpcom
+fi
 
 %postun -n mozilla-plugin-macromedia-flash
 umask 022
 rm -f %{_libdir}/mozilla/components/{compreg,xpti}.dat
-MOZILLA_FIVE_HOME=%{_libdir}/mozilla %{_bindir}/regxpcom
+if [ -x %{_bindir}/regxpcom ]; then
+	MOZILLA_FIVE_HOME=%{_libdir}/mozilla %{_bindir}/regxpcom
+fi
 
 %files -n mozilla-plugin-macromedia-flash
 %defattr(644,root,root,755)
