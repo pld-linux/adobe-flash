@@ -28,7 +28,7 @@ Summary:	Flash plugin for Mozilla based browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek opartych na Mozilli
 Group:		X11/Applications/Multimedia
 PreReq:		mozilla-embedded >= 1.0
-Requires:	libstdc++-compat
+Requires:	compat-libstdc++-2.10
 Obsoletes:	flash-plugin
 
 %description -n mozilla-plugin-macromedia-flash
@@ -44,7 +44,7 @@ Summary:	Flash plugin for konqueror based browser
 Summary(pl):	Wtyczka obs³uguj±ca Flash dla przegl±darek opartych na konquerorze
 Group:		X11/Applications/Multimedia
 PreReq:		konqueror >= 3.0.8-2.3
-Requires:	libstdc++-compat
+Requires:	compat-libstdc++-2.10
 Obsoletes:	flash-plugin
 
 %description -n konqueror-plugin-macromedia-flash
