@@ -1,7 +1,7 @@
-
+#
 # Conditional build:
 # _with_ra			- build in RA environment
-
+#
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape
 Name:		macromedia-flash
@@ -10,9 +10,9 @@ Release:	2
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 Source0:	http://download.macromedia.com/pub/shockwave/flash/english/linux/%{version}/install_flash_player_6_linux.tar.gz
-# Source0-md5:	a6f73da96f89d3dba4fadd4020dd7f38
+# NoSource0-md5: a6f73da96f89d3dba4fadd4020dd7f38
 NoSource:	0
-URL:		http://www.macromedia.com/
+URL:		http://www.macromedia.com/software/flash/
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
