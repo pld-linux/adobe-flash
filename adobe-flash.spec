@@ -58,20 +58,18 @@ Pakiet zawiera wtyczkê dla technologii Flash dla przegl±darki
 Mozilla Firefox.
 
 %package -n konqueror-plugin-macromedia-flash
-Summary:	Flash plugin for konqueror based browser
-Summary(pl):	Wtyczka obs³uguj±ca Flash dla przegl±darek opartych na konquerorze
+Summary:	Flash plugin for Konqueror browser
+Summary(pl):	Wtyczka obs³uguj±ca Flash dla przegl±darki Konqueror
 Group:		X11/Applications/Multimedia
 PreReq:		konqueror >= 3.0.8-2.3
 Obsoletes:	flash-plugin
 
 %description -n konqueror-plugin-macromedia-flash
-This package contains flash plugin for konqueror based browsers, i.e.
-konqueror itself or netraider.
+This package contains flash plugin for Konqueror browser.
 
 %description -n konqueror-plugin-macromedia-flash -l pl
-Pakiet zawiera wtyczkê obs³uguj±c± technologiê Flash dla przegl±darek
-opartych na konquerorze, czyli konquerora jako takiego oraz
-netraidera.
+Pakiet zawiera wtyczkê obs³uguj±c± technologiê Flash dla przegl±darki
+Konqueror.
 
 %prep
 %if %{with license_agreement}
