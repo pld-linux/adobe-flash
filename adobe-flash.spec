@@ -31,7 +31,7 @@ Summary:	Flash plugin for Mozilla based browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek opartych na Mozilli
 Group:		X11/Applications/Multimedia
 PreReq:		mozilla-embedded >= 1.0
-Requires:	libstdc++-compat 
+Requires:	libstdc++-compat
 Obsoletes:	flash-plugin
 
 %description -n mozilla-plugin-macromedia-flash
