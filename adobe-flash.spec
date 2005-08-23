@@ -11,7 +11,7 @@ Name:		%{base_name}
 Name:		%{base_name}-installer
 %endif
 Version:	7.0r25
-Release:	2.23%{?with_license_agreement:wla}
+Release:	2.26%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
@@ -21,7 +21,7 @@ Source0:	http://fpdownload.macromedia.com/get/shockwave/flash/english/linux/%{ve
 Source0:	license-installer.sh
 %endif
 URL:		http://www.macromedia.com/software/flash/
-BuildRequires:	rpmbuild(macros) >= 1.224
+BuildRequires:	rpmbuild(macros) >= 1.235
 Requires:	browser-plugins(%{_target_cpu})
 %if %{without license_agreement}
 Requires:	/usr/bin/builder
@@ -93,18 +93,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %triggerin -- mozilla
 %nsplugin_install -d %{_libdir}/mozilla/plugins libflashplayer.so flashplayer.xpt
-umask 022
-rm -f /usr/%{_lib}/mozilla/components/{compreg,xpti}.dat
-if [ -x /usr/bin/regxpcom ]; then
-	MOZILLA_FIVE_HOME=/usr/%{_lib}/mozilla /usr/bin/regxpcom
+if [ -d /usr/%{_lib}/mozilla ]; then
+	umask 022
+	rm -f /usr/%{_lib}/mozilla/components/{compreg,xpti}.dat
+	if [ -x /usr/bin/regxpcom ]; then
+		MOZILLA_FIVE_HOME=/usr/%{_lib}/mozilla /usr/bin/regxpcom
+	fi
 fi
 
 %triggerun -- mozilla
 %nsplugin_uninstall -d %{_libdir}/mozilla/plugins libflashplayer.so flashplayer.xpt
-umask 022
-rm -f /usr/%{_lib}/mozilla/components/{compreg,xpti}.dat
-if [ -x /usr/bin/regxpcom ]; then
-	MOZILLA_FIVE_HOME=/usr/%{_lib}/mozilla /usr/bin/regxpcom
+if [ -d /usr/%{_lib}/mozilla ]; then
+	umask 022
+	rm -f /usr/%{_lib}/mozilla/components/{compreg,xpti}.dat
+	if [ -x /usr/bin/regxpcom ]; then
+		MOZILLA_FIVE_HOME=/usr/%{_lib}/mozilla /usr/bin/regxpcom
+	fi
 fi
 
 %triggerin -- konqueror
