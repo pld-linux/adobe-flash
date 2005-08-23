@@ -11,7 +11,7 @@ Name:		%{base_name}
 Name:		%{base_name}-installer
 %endif
 Version:	7.0r25
-Release:	2%{?with_license_agreement:wla}.2
+Release:	2.13%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
@@ -19,57 +19,33 @@ Source0:	http://fpdownload.macromedia.com/get/shockwave/flash/english/linux/%{ve
 # NoSource0-md5:	79c59a5ea29347e01c8e6575dd054cd1
 %endif
 URL:		http://www.macromedia.com/software/flash/
+BuildRequires:	rpmbuild(macros) >= 1.224
+Requires:	browser-plugins
+%if %{without license_agreement}
+Requires:	/usr/bin/builder
+%endif
+Obsoletes:	flash-plugin
+Obsoletes:	mozilla-plugin-macromedia-flash
+Obsoletes:	mozilla-firefox-plugin-macromedia-flash
+Obsoletes:	konqueror-plugin-macromedia-flash
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_plugindir	%{_libdir}/browser-plugins
+
+# TODO: opera, galeon and skipstone.
+# use macro, otherwise extra LF inserted along with the ifarch
+%define	browsers mozilla, mozilla-firefox, konqueror
 
 %description
 Flash plugin for Netscape-compatible WWW browsers.
 
+Supported browsers: %{browsers}.
+
 %description -l pl
 Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape.
 
-%package -n mozilla-plugin-macromedia-flash
-Summary:	Flash plugin for Mozilla based browsers
-Summary(pl):	Wtyczka Flash dla przegl±darek opartych na Mozilli
-Group:		X11/Applications/Multimedia
-PreReq:		mozilla-embedded >= 1.0
-Obsoletes:	flash-plugin
-
-%description -n mozilla-plugin-macromedia-flash
-This package contains flash plugin for Mozilla based browsers, i.e.
-mozilla itself, galeon or skipstone.
-
-%description -n mozilla-plugin-macromedia-flash -l pl
-Pakiet zawiera wtyczkê dla technologii Flash dla przegl±darek opartych
-na Mozilli, np.: mozilli jako takiej, galeona czy te¿ skipstone'a.
-
-%package -n mozilla-firefox-plugin-macromedia-flash
-Summary:	Flash plugin for Mozilla Firefox browser
-Summary(pl):	Wtyczka Flash dla Mozilla Firefox
-Group:		X11/Applications/Multimedia
-PreReq:		mozilla-firefox
-Obsoletes:	flash-plugin
-
-%description -n mozilla-firefox-plugin-macromedia-flash
-This package contains flash plugin for Mozilla Firefox browser.
-
-%description -n mozilla-firefox-plugin-macromedia-flash -l pl
-Pakiet zawiera wtyczkê dla technologii Flash dla przegl±darki
-Mozilla Firefox.
-
-%package -n konqueror-plugin-macromedia-flash
-Summary:	Flash plugin for Konqueror browser
-Summary(pl):	Wtyczka obs³uguj±ca Flash dla przegl±darki Konqueror
-Group:		X11/Applications/Multimedia
-PreReq:		konqueror >= 3.0.8-2.3
-Obsoletes:	flash-plugin
-
-%description -n konqueror-plugin-macromedia-flash
-This package contains flash plugin for Konqueror browser.
-
-%description -n konqueror-plugin-macromedia-flash -l pl
-Pakiet zawiera wtyczkê obs³uguj±c± technologiê Flash dla przegl±darki
-Konqueror.
+Supported browsers: %{browsers}.
 
 %prep
 %if %{with license_agreement}
@@ -114,28 +90,8 @@ if [ "$1" = "--with" -a "$2" = "license_agreement" ]; then
 	if [ "$?" -ne 0 ]; then
 		exit 2
 	fi
-	RPMNAME1=mozilla-plugin-macromedia-flash-%{version}-%{release}wla.%{_target_cpu}.rpm
-	RPMNAME2=mozilla-firefox-plugin-macromedia-flash-%{version}-%{release}wla.%{_target_cpu}.rpm
-	RPMNAME3=konqueror-plugin-macromedia-flash-%{version}-%{release}wla.%{_target_cpu}.rpm
-	RPMNAMES=
-	if rpm -q --whatprovides mozilla-embedded >/dev/null 2>&1; then
-		RPMNAMES=$RPMDIR/$RPMNAME1
-		echo "Installing $RPMNAME1"
-	else
-		echo "Not installing $RPMNAME1"
-	fi
-	if rpm -q mozilla-firefox >/dev/null 2>&1; then
-		RPMNAMES="$RPMNAMES $RPMDIR/$RPMNAME2"
-		echo "Installing $RPMNAME2"
-	else
-		echo "Not installing $RPMNAME2"
-	fi
-	if rpm -q konqueror >/dev/null 2>&1; then
-		RPMNAMES="$RPMNAMES $RPMDIR/$RPMNAME3"
-		echo "Installing $RPMNAME3"
-	else
-		echo "Not installing $RPMNAME3"
-	fi
+	RPMNAME=%{base_name}-%{version}-%{release}wla.%{_target_cpu}.rpm
+	RPMNAMES="$RPMNAMES $RPMDIR/$RPMNAME"
 	rpm -U $RPMNAMES || echo -e "Install manually the file(s):\n   $RPMNAMES" )
 	if [ "$BACKUP" -eq 1 ]; then
 		if [ -f $SPECDIR/%{base_name}.spec.prev ]; then
@@ -157,11 +113,8 @@ install %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
 
 %else
 
-install -d $RPM_BUILD_ROOT%{_libdir}/{mozilla/plugins,/mozilla-firefox/plugins,/kde3/plugins/konqueror}
-
-install *.{so,xpt} $RPM_BUILD_ROOT%{_libdir}/mozilla/plugins
-install *.{so,xpt} $RPM_BUILD_ROOT%{_libdir}/mozilla-firefox/plugins
-install *.so $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/konqueror
+install -d $RPM_BUILD_ROOT%{_plugindir}
+install *.{so,xpt} $RPM_BUILD_ROOT%{_plugindir}
 
 %endif
 
@@ -177,40 +130,46 @@ package please build it with the following command:
 
 %{base_name}.install --with license_agreement %{_datadir}/%{base_name}/%{base_name}.spec
 "
+%else
+
+%triggerin -- mozilla-firefox
+%nsplugin_install -d %{_libdir}/mozilla-firefox/plugins libflashplayer.so flashplayer.xpt
+
+%triggerun -- mozilla-firefox
+%nsplugin_uninstall -d %{_libdir}/mozilla-firefox/plugins libflashplayer.so flashplayer.xpt
+
+%triggerin -- mozilla
+%nsplugin_install -d %{_libdir}/mozilla/plugins libflashplayer.so flashplayer.xpt
+umask 022
+rm -f /usr/%{_lib}/mozilla/components/{compreg,xpti}.dat
+if [ -x /usr/bin/regxpcom ]; then
+	MOZILLA_FIVE_HOME=/usr/%{_lib}/mozilla /usr/bin/regxpcom
+fi
+
+%triggerun -- mozilla
+%nsplugin_uninstall -d %{_libdir}/mozilla/plugins libflashplayer.so flashplayer.xpt
+umask 022
+rm -f /usr/%{_lib}/mozilla/components/{compreg,xpti}.dat
+if [ -x /usr/bin/regxpcom ]; then
+	MOZILLA_FIVE_HOME=/usr/%{_lib}/mozilla /usr/bin/regxpcom
+fi
+
+%triggerin -- konqueror
+%nsplugin_install -d %{_libdir}/kde3/plugins/konqueror libflashplayer.so
+
+%triggerun -- konqueror
+%nsplugin_uninstall -d %{_libdir}/kde3/plugins/konqueror libflashplayer.so
+
 %endif
 
-%post -n mozilla-plugin-macromedia-flash
-umask 022
-rm -f /usr/%{_lib}/mozilla/components/{compreg,xpti}.dat
-if [ -x /usr/bin/regxpcom ]; then
-	MOZILLA_FIVE_HOME=/usr/%{_lib}/mozilla /usr/bin/regxpcom
-fi
-
-%postun -n mozilla-plugin-macromedia-flash
-umask 022
-rm -f /usr/%{_lib}/mozilla/components/{compreg,xpti}.dat
-if [ -x /usr/bin/regxpcom ]; then
-	MOZILLA_FIVE_HOME=/usr/%{_lib}/mozilla /usr/bin/regxpcom
-fi
-
-%if %{without license_agreement}
 %files
 %defattr(644,root,root,755)
+
+%if %{without license_agreement}
 %attr(755,root,root) %{_bindir}/%{base_name}.install
 %{_datadir}/%{base_name}
 
 %else
-%files -n mozilla-plugin-macromedia-flash
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/mozilla/plugins/*.so
-%{_libdir}/mozilla/plugins/*.xpt
-
-%files -n mozilla-firefox-plugin-macromedia-flash
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/mozilla-firefox/plugins/*.so
-%{_libdir}/mozilla-firefox/plugins/*.xpt
-
-%files -n konqueror-plugin-macromedia-flash
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde3/plugins/konqueror/*.so
+%attr(755,root,root) %{_plugindir}/*.so
+%{_plugindir}/*.xpt
 %endif
