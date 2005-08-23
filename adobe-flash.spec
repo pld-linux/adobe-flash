@@ -20,7 +20,7 @@ Source0:	http://fpdownload.macromedia.com/get/shockwave/flash/english/linux/%{ve
 %else
 Source0:	license-installer.sh
 %endif
-URL:		http://www.macromedia.com/software/flash/
+URL:		http://www.macromedia.com/software/flashplayer/
 BuildRequires:	rpmbuild(macros) >= 1.235
 Requires:	browser-plugins(%{_target_cpu})
 %if %{without license_agreement}
