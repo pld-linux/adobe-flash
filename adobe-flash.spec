@@ -26,7 +26,6 @@ Requires:	browser-plugins(%{_target_cpu})
 %if %{without license_agreement}
 Requires:	cpio
 Requires:	rpm-build-tools
-Requires:	unzip
 Requires:	wget
 %endif
 Obsoletes:	flash-plugin
