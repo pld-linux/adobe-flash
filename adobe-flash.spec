@@ -11,7 +11,7 @@ Name:		%{base_name}
 Name:		%{base_name}-installer
 %endif
 Version:	7.0r25
-Release:	2%{?with_license_agreement:wla}
+Release:	2%{?with_license_agreement:wla}.1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
@@ -81,38 +81,37 @@ rm -rf $RPM_BUILD_ROOT
 %if ! %{with license_agreement}
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{base_name}}
 
-cat <<EOF >$RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
+cat <<'EOF' >$RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
 #!/bin/sh
-if [ "\$1" = "--with" -a "\$2" = "license_agreement" ]; then
-	TMPDIR=\`rpm --eval "%%{tmpdir}"\`; export TMPDIR
-	SPECDIR=\`rpm --eval "%%{_specdir}"\`; export SPECDIR
-	SRPMDIR=\`rpm --eval "%%{_srcrpmdir}"\`; export SRPMDIR
-	SOURCEDIR=\`rpm --eval "%%{_sourcedir}"\`; export SOURCEDIR
-	BUILDDIR=\`rpm --eval "%%{_builddir}"\`; export BUILDDIR
-	RPMDIR=\`rpm --eval "%%{_rpmdir}"\`; export RPMDIR
+if [ "$1" = "--with" -a "$2" = "license_agreement" ]; then
+	TMPDIR=`rpm --eval "%%{tmpdir}"`; export TMPDIR
+	SPECDIR=`rpm --eval "%%{_specdir}"`; export SPECDIR
+	SRPMDIR=`rpm --eval "%%{_srcrpmdir}"`; export SRPMDIR
+	SOURCEDIR=`rpm --eval "%%{_sourcedir}"`; export SOURCEDIR
+	BUILDDIR=`rpm --eval "%%{_builddir}"`; export BUILDDIR
+	RPMDIR=`rpm --eval "%%{_rpmdir}"`; export RPMDIR
 	BACKUP=0
-	mkdir -p \$TMPDIR \$SPECDIR \$SRPMDIR \$RPMDIR \$SRPMDIR \$SOURCEDIR \$BUILDDIR
-	if [ -f \$SPECDIR/%{base_name}.spec ]; then
+	mkdir -p $TMPDIR $SPECDIR $SRPMDIR $RPMDIR $SRPMDIR $SOURCEDIR $BUILDDIR
+	if [ -f $SPECDIR/%{base_name}.spec ]; then
 		BACKUP=1
-		mv -f \$SPECDIR/%{base_name}.spec \$SPECDIR/%{base_name}.spec.prev
+		mv -f $SPECDIR/%{base_name}.spec $SPECDIR/%{base_name}.spec.prev
 	fi
-	if echo "\$3" | grep '\.src\.rpm$' >/dev/null; then
-		( cd \$SRPMDIR
-		if echo "\$3" | grep '://' >/dev/null; then
-			wget --passive-ftp -t0 "\$3"
+	if echo "$3" | grep '\.src\.rpm$' >/dev/null; then
+		( cd $SRPMDIR
+		if echo "$3" | grep '://' >/dev/null; then
+			wget --passive-ftp -t0 "$3"
 		else
-			cp -f "\$3" .
+			cp -f "$3" .
 		fi
-		rpm2cpio \`basename "\$3"\` | ( cd \$TMPDIR; cpio -i %{base_name}.spec )
+		rpm2cpio `basename "$3"` | ( cd $TMPDIR; cpio -i %{base_name}.spec )
 		)
-		cp -i \$TMPDIR/%{base_name}.spec \$SPECDIR/%{base_name}.spec \
-			|| exit 1
+		cp -i $TMPDIR/%{base_name}.spec $SPECDIR/%{base_name}.spec || exit 1
 	else
-		cp -i "\$3" \$SPECDIR || exit 1
+		cp -i "$3" $SPECDIR || exit 1
 	fi
-	( cd \$SPECDIR
+	( cd $SPECDIR
 	%{_bindir}/builder -nc -ncs --with license_agreement --opts --target=%{_target_cpu} %{base_name}.spec
-	if [ "\$?" -ne 0 ]; then
+	if [ "$?" -ne 0 ]; then
 		exit 2
 	fi
 	RPMNAME1=mozilla-plugin-macromedia-flash-%{version}-%{release}wla.%{_target_cpu}.rpm
@@ -120,28 +119,27 @@ if [ "\$1" = "--with" -a "\$2" = "license_agreement" ]; then
 	RPMNAME3=konqueror-plugin-macromedia-flash-%{version}-%{release}wla.%{_target_cpu}.rpm
 	RPMNAMES=
 	if rpm -q --whatprovides mozilla-embedded >/dev/null 2>&1; then
-		RPMNAMES=\$RPMDIR/\$RPMNAME1
-		echo "Installing \$RPMNAME1"
+		RPMNAMES=$RPMDIR/$RPMNAME1
+		echo "Installing $RPMNAME1"
 	else
-		echo "Not installing \$RPMNAME1"
+		echo "Not installing $RPMNAME1"
 	fi
 	if rpm -q mozilla-firefox >/dev/null 2>&1; then
-		RPMNAMES="\$RPMNAMES \$RPMDIR/\$RPMNAME2"
-		echo "Installing \$RPMNAME2"
+		RPMNAMES="$RPMNAMES $RPMDIR/$RPMNAME2"
+		echo "Installing $RPMNAME2"
 	else
-		echo "Not installing \$RPMNAME2"
+		echo "Not installing $RPMNAME2"
 	fi
 	if rpm -q konqueror >/dev/null 2>&1; then
-		RPMNAMES="\$RPMNAMES \$RPMDIR/\$RPMNAME3"
-		echo "Installing \$RPMNAME3"
+		RPMNAMES="$RPMNAMES $RPMDIR/$RPMNAME3"
+		echo "Installing $RPMNAME3"
 	else
-		echo "Not installing \$RPMNAME3"
+		echo "Not installing $RPMNAME3"
 	fi
-	rpm -U \$RPMNAMES || \
-		echo -e "Install manually the file(s):\n   \$RPMNAMES" )
-	if [ "\$BACKUP" -eq 1 ]; then
-		if [ -f \$SPECDIR/%{base_name}.spec.prev ]; then
-			mv -f \$SPECDIR/%{base_name}.spec.prev \$SPECDIR/%{base_name}.spec
+	rpm -U $RPMNAMES || echo -e "Install manually the file(s):\n   $RPMNAMES" )
+	if [ "$BACKUP" -eq 1 ]; then
+		if [ -f $SPECDIR/%{base_name}.spec.prev ]; then
+			mv -f $SPECDIR/%{base_name}.spec.prev $SPECDIR/%{base_name}.spec
 		fi
 	fi
 else
@@ -150,7 +148,7 @@ License issues made us not to include inherent files into
 this package by default. If you want to create full working
 package please build it with the following command:
 
-\$0 --with license_agreement %{_datadir}/%{base_name}/%{base_name}.spec
+$0 --with license_agreement %{_datadir}/%{base_name}/%{base_name}.spec
 "
 fi
 EOF
