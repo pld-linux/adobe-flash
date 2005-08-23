@@ -11,7 +11,7 @@ Name:		%{base_name}
 Name:		%{base_name}-installer
 %endif
 Version:	7.0r25
-Release:	2.22%{?with_license_agreement:wla}
+Release:	2.23%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
@@ -22,7 +22,7 @@ Source0:	license-installer.sh
 %endif
 URL:		http://www.macromedia.com/software/flash/
 BuildRequires:	rpmbuild(macros) >= 1.224
-Requires:	browser-plugins
+Requires:	browser-plugins(%{_target_cpu})
 %if %{without license_agreement}
 Requires:	/usr/bin/builder
 %endif
