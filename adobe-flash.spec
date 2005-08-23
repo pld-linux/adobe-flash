@@ -11,7 +11,7 @@ Name:		%{base_name}
 Name:		%{base_name}-installer
 %endif
 Version:	7.0r25
-Release:	2.17%{?with_license_agreement:wla}
+Release:	2.22%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
@@ -35,9 +35,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_plugindir	%{_libdir}/browser-plugins
 
-# TODO: opera, galeon and skipstone.
+# TODO: galeon and skipstone.
 # use macro, otherwise extra LF inserted along with the ifarch
-%define	browsers mozilla, mozilla-firefox, konqueror
+%define	browsers mozilla, mozilla-firefox, konqueror, opera
 
 %description
 Flash plugin for Netscape-compatible WWW browsers.
@@ -112,6 +112,12 @@ fi
 
 %triggerun -- konqueror
 %nsplugin_uninstall -d %{_libdir}/kde3/plugins/konqueror libflashplayer.so
+
+%triggerin -- opera
+%nsplugin_install -d %{_libdir}/opera/plugins libflashplayer.so
+
+%triggerun -- opera
+%nsplugin_uninstall -d %{_libdir}/opera/plugins libflashplayer.so
 
 %endif
 
