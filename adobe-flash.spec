@@ -49,7 +49,7 @@ Supported browsers: %{browsers}.
 %description -l pl
 Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape.
 
-Supported browsers: %{browsers}.
+Obs³ugiwane przegl±darki: %{browsers}.
 
 %prep
 %if %{with license_agreement}
