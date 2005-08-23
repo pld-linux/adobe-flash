@@ -24,7 +24,10 @@ URL:		http://www.macromedia.com/software/flash/
 BuildRequires:	rpmbuild(macros) >= 1.235
 Requires:	browser-plugins(%{_target_cpu})
 %if %{without license_agreement}
-Requires:	/usr/bin/builder
+Requires:	cpio
+Requires:	rpm-build-tools
+Requires:	unzip
+Requires:	wget
 %endif
 Obsoletes:	flash-plugin
 Obsoletes:	mozilla-plugin-macromedia-flash
