@@ -11,7 +11,7 @@ Name:		%{base_name}
 Name:		%{base_name}-installer
 %endif
 Version:	7.0r25
-Release:	2%{?with_license_agreement:wla}.1
+Release:	2%{?with_license_agreement:wla}.2
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
@@ -78,7 +78,7 @@ Konqueror.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%if ! %{with license_agreement}
+%if %{without license_agreement}
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{base_name}}
 
 cat <<'EOF' >$RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
@@ -168,7 +168,7 @@ install *.so $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/konqueror
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%if ! %{with license_agreement}
+%if %{without license_agreement}
 %pre
 echo "
 License issues made us not to include inherent files into
@@ -193,7 +193,7 @@ if [ -x /usr/bin/regxpcom ]; then
 	MOZILLA_FIVE_HOME=/usr/%{_lib}/mozilla /usr/bin/regxpcom
 fi
 
-%if ! %{with license_agreement}
+%if %{without license_agreement}
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/%{base_name}.install
