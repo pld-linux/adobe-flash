@@ -1,7 +1,9 @@
-#
 # Conditional build:
 %bcond_with	license_agreement	# generates package
-#
+
+%define		_ver_major	7
+%define		_ver_minor	0
+%define		_ver_patch	25
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape
 %define		base_name	macromedia-flash
@@ -10,18 +12,20 @@ Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-Version:	7.0r25
-Release:	2.26%{?with_license_agreement:wla}
+Version:	%{_ver_major}.%{_ver_minor}.%{_ver_patch}
+Release:	2.29%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://fpdownload.macromedia.com/get/shockwave/flash/english/linux/%{version}/install_flash_player_7_linux.tar.gz
+Source0:	http://fpdownload.macromedia.com/get/shockwave/flash/english/linux/%{_ver_major}.%{_ver_minor}r%{_ver_patch}/install_flash_player_%{_ver_major}_linux.tar.gz
 # NoSource0-md5:	79c59a5ea29347e01c8e6575dd054cd1
 %else
 Source0:	license-installer.sh
 %endif
 URL:		http://www.macromedia.com/software/flashplayer/
+%if %{with license_agreement}
 BuildRequires:	rpmbuild(macros) >= 1.235
+%endif
 Requires:	browser-plugins(%{_target_cpu})
 %if %{without license_agreement}
 Requires:	cpio
