@@ -13,7 +13,7 @@ Name:		%{base_name}
 Name:		%{base_name}-installer
 %endif
 Version:	%{_ver_major}.%{_ver_minor}.%{_ver_patch}
-Release:	2.29%{?with_license_agreement:wla}
+Release:	2.36%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
@@ -24,7 +24,7 @@ Source0:	license-installer.sh
 %endif
 URL:		http://www.macromedia.com/software/flashplayer/
 %if %{with license_agreement}
-BuildRequires:	rpmbuild(macros) >= 1.235
+BuildRequires:	rpmbuild(macros) >= 1.236
 %endif
 Requires:	browser-plugins(%{_target_cpu})
 %if %{without license_agreement}
@@ -129,6 +129,16 @@ fi
 %triggerun -- opera
 %nsplugin_uninstall -d %{_libdir}/opera/plugins libflashplayer.so
 
+# as rpm removes the old obsoleted package files after the triggers
+# above are ran, add another trigger to make the links there.
+%triggerpostun -- mozilla-firefox-plugin-macromedia-flash
+%nsplugin_install -f -d %{_libdir}/mozilla-firefox/plugins libflashplayer.so flashplayer.xpt
+
+%triggerpostun -- mozilla-plugin-macromedia-flash
+%nsplugin_install -f -d %{_libdir}/mozilla/plugins libflashplayer.so flashplayer.xpt
+
+%triggerpostun -- konqueror-plugin-macromedia-flash
+%nsplugin_install -f -d %{_libdir}/kde3/plugins/konqueror libflashplayer.so
 %endif
 
 %files
