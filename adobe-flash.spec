@@ -86,7 +86,7 @@ install *.{so,xpt} $RPM_BUILD_ROOT%{_plugindir}
 rm -rf $RPM_BUILD_ROOT
 
 %if %{without license_agreement}
-%pre
+%post
 %{_bindir}/%{base_name}.install
 
 %else
