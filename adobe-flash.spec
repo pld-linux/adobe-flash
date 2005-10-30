@@ -1,6 +1,7 @@
+#
 # Conditional build:
 %bcond_with	license_agreement	# generates package
-
+#
 %define		_ver_major	7
 %define		_ver_minor	0
 %define		_ver_patch	25
