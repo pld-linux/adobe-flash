@@ -4,7 +4,7 @@
 #
 %define		_ver_major	7
 %define		_ver_minor	0
-%define		_ver_patch	25
+%define		_ver_patch	61.0
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape
 %define		base_name	macromedia-flash
@@ -14,12 +14,13 @@ Name:		%{base_name}
 Name:		%{base_name}-installer
 %endif
 Version:	%{_ver_major}.%{_ver_minor}.%{_ver_patch}
-Release:	4%{?with_license_agreement:wla}
+%define		_rel 1
+Release:	%{_rel}%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://fpdownload.macromedia.com/get/shockwave/flash/english/linux/%{_ver_major}.%{_ver_minor}r%{_ver_patch}/install_flash_player_%{_ver_major}_linux.tar.gz
-# NoSource0-md5:	79c59a5ea29347e01c8e6575dd054cd1
+Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_%{_ver_major}_linux.tar.gz
+# NoSource0-md5:	b063b512076d4c88a56cb7521e6b5409
 %else
 Source0:	license-installer.sh
 %endif
@@ -150,6 +151,7 @@ fi
 %{_datadir}/%{base_name}
 
 %else
+%doc Readme.txt
 %attr(755,root,root) %{_plugindir}/*.so
 %{_plugindir}/*.xpt
 %endif
