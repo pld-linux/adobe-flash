@@ -4,24 +4,24 @@
 #
 %define		_ver_major	7
 %define		_ver_minor	0
-%define		_ver_patch	61
+%define		_ver_patch	63
 %define		_ver_serial	0
+%define		base_name	macromedia-flash
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape
-%define		base_name	macromedia-flash
 %if %{with license_agreement}
 Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-Version:	%{_ver_major}.%{_ver_minor}.%{_ver_patch}.%{_ver_serial}
 %define		_rel 1
+Version:	%{_ver_major}.%{_ver_minor}.%{_ver_patch}.%{_ver_serial}
 Release:	%{_rel}%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	http://distfiles.gentoo.org/distfiles/flash-plugin-%{_ver_major}.%{_ver_minor}.%{_ver_patch}.tar.gz
-# NoSource0-md5:	b063b512076d4c88a56cb7521e6b5409
+# NoSource0-md5:	a835bc6613c76f62c74a50406bd5801d
 %else
 Source0:	license-installer.sh
 %endif
@@ -36,9 +36,9 @@ Requires:	rpm-build-tools
 Requires:	wget
 %endif
 Obsoletes:	flash-plugin
-Obsoletes:	mozilla-plugin-macromedia-flash
-Obsoletes:	mozilla-firefox-plugin-macromedia-flash
 Obsoletes:	konqueror-plugin-macromedia-flash
+Obsoletes:	mozilla-firefox-plugin-macromedia-flash
+Obsoletes:	mozilla-plugin-macromedia-flash
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
