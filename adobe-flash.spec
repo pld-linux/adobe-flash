@@ -132,6 +132,12 @@ fi
 %triggerun -- opera
 %nsplugin_uninstall -d %{_libdir}/opera/plugins libflashplayer.so
 
+%triggerin -- seamonkey
+%nsplugin_install -d %{_libdir}/seamonkey/plugins libflashplayer.so
+
+%triggerun -- seamonkey
+%nsplugin_uninstall -d %{_libdir}/seamonkey/plugins libflashplayer.so
+
 # as rpm removes the old obsoleted package files after the triggers
 # above are ran, add another trigger to make the links there.
 %triggerpostun -- mozilla-firefox-plugin-macromedia-flash
