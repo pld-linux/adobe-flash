@@ -28,12 +28,10 @@ Source0:	license-installer.sh
 URL:		http://www.macromedia.com/software/flashplayer/
 %if %{with license_agreement}
 BuildRequires:	rpmbuild(macros) >= 1.236
-%endif
 Requires:	browser-plugins(%{_target_cpu})
+%endif
 %if %{without license_agreement}
-Requires:	cpio
 Requires:	rpm-build-tools
-Requires:	wget
 %endif
 Obsoletes:	flash-plugin
 Obsoletes:	konqueror-plugin-macromedia-flash
