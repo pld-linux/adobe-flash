@@ -29,8 +29,7 @@ URL:		http://www.macromedia.com/software/flashplayer/
 %if %{with license_agreement}
 BuildRequires:	rpmbuild(macros) >= 1.236
 Requires:	browser-plugins(%{_target_cpu})
-%endif
-%if %{without license_agreement}
+%else
 Requires:	rpm-build-tools
 %endif
 Obsoletes:	flash-plugin
