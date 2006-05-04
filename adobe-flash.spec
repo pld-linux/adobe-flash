@@ -14,7 +14,7 @@ Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-%define		_rel 3
+%define		_rel 4
 Version:	%{_ver_major}.%{_ver_minor}.%{_ver_patch}.%{_ver_serial}
 Release:	%{_rel}%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
@@ -28,7 +28,7 @@ Source0:	license-installer.sh
 URL:		http://www.macromedia.com/software/flashplayer/
 %if %{with license_agreement}
 BuildRequires:	rpmbuild(macros) >= 1.236
-Requires:	browser-plugins(%{_target_cpu})
+Requires:	browser-plugins(%{_target_base_arch})
 %else
 Requires:	rpm-build-tools
 %endif
