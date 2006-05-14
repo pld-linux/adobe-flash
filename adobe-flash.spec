@@ -14,7 +14,7 @@ Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-%define		_rel 4
+%define		_rel 5
 Version:	%{_ver_major}.%{_ver_minor}.%{_ver_patch}.%{_ver_serial}
 Release:	%{_rel}%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
@@ -43,7 +43,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # TODO: galeon and skipstone.
 # use macro, otherwise extra LF inserted along with the ifarch
-%define	browsers mozilla, mozilla-firefox, konqueror, opera
+%define	browsers mozilla, mozilla-firefox, konqueror, opera, seamonkey
 
 %description
 Flash plugin for Netscape-compatible WWW browsers.
@@ -130,10 +130,10 @@ fi
 %nsplugin_uninstall -d %{_libdir}/opera/plugins libflashplayer.so
 
 %triggerin -- seamonkey
-%nsplugin_install -d %{_libdir}/seamonkey/plugins libflashplayer.so
+%nsplugin_install -d %{_libdir}/seamonkey/plugins libflashplayer.so flashplayer.xpt
 
 %triggerun -- seamonkey
-%nsplugin_uninstall -d %{_libdir}/seamonkey/plugins libflashplayer.so
+%nsplugin_uninstall -d %{_libdir}/seamonkey/plugins libflashplayer.so flashplayer.xpt
 
 # as rpm removes the old obsoleted package files after the triggers
 # above are ran, add another trigger to make the links there.
