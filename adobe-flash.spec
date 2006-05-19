@@ -14,7 +14,7 @@ Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-%define		_rel 5
+%define		_rel 6
 Version:	%{_ver_major}.%{_ver_minor}.%{_ver_patch}.%{_ver_serial}
 Release:	%{_rel}%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
@@ -99,23 +99,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %triggerin -- mozilla
 %nsplugin_install -d %{_libdir}/mozilla/plugins libflashplayer.so flashplayer.xpt
-if [ -d /usr/%{_lib}/mozilla ]; then
-	umask 022
-	rm -f /usr/%{_lib}/mozilla/components/{compreg,xpti}.dat
-	if [ -x /usr/bin/regxpcom ]; then
-		MOZILLA_FIVE_HOME=/usr/%{_lib}/mozilla /usr/bin/regxpcom
-	fi
-fi
 
 %triggerun -- mozilla
 %nsplugin_uninstall -d %{_libdir}/mozilla/plugins libflashplayer.so flashplayer.xpt
-if [ -d /usr/%{_lib}/mozilla ]; then
-	umask 022
-	rm -f /usr/%{_lib}/mozilla/components/{compreg,xpti}.dat
-	if [ -x /usr/bin/regxpcom ]; then
-		MOZILLA_FIVE_HOME=/usr/%{_lib}/mozilla /usr/bin/regxpcom
-	fi
-fi
 
 %triggerin -- konqueror
 %nsplugin_install -d %{_libdir}/kde3/plugins/konqueror libflashplayer.so
