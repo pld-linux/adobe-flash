@@ -25,7 +25,7 @@ Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_
 %else
 Source0:	license-installer.sh
 %endif
-URL:		http://www.macromedia.com/software/flashplayer/
+URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
 BuildRequires:	rpmbuild(macros) >= 1.236
 Requires:	browser-plugins(%{_target_base_arch})
@@ -58,6 +58,11 @@ Obs³ugiwane przegl±darki: %{browsers}.
 %prep
 %if %{with license_agreement}
 %setup -q -n install_flash_player_7_linux
+ver=$(awk '/^Version/{print $2}' Readme.txt)
+if [ "$ver" != %{version} ]; then
+	: This tarball is not version %{version}. Source mentions version $ver. Something wrong
+	exit 1
+fi
 %endif
 
 %install
