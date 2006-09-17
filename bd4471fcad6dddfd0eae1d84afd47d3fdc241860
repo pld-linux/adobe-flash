@@ -1,0 +1,3 @@
+- updated to 7.0.68 (fixes several security vulnerabilities as reported in Adobe Vulnerability APSB06-11)
+  CVE-2006-3311 CVE-2006-3587 CVE-2006-3588
+- changed Source0 URL
