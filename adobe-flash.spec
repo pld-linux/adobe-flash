@@ -20,7 +20,7 @@ Release:	%{_rel}%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_7_linux.tar.gz
+Source0:	http://macromedia.mplug.org/rpmsource/flash-plugin-%{_ver_major}.%{_ver_minor}.%{_ver_patch}.tar.gz
 # NoSource0-md5:	a18532c8457f1140964c4d896a928c96
 %else
 Source0:	license-installer.sh
