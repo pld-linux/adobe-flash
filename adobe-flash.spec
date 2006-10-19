@@ -2,10 +2,10 @@
 # Conditional build:
 %bcond_with	license_agreement	# generates package
 #
-%define		_ver_major	7
+%define		_ver_major	9
 %define		_ver_minor	0
-%define		_ver_patch	68
-%define		_ver_serial	0
+%define		_ver_patch	21
+%define		_ver_serial	55
 %define		base_name	macromedia-flash
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape
@@ -20,10 +20,11 @@ Release:	%{_rel}%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://macromedia.mplug.org/rpmsource/flash-plugin-%{_ver_major}.%{_ver_minor}.%{_ver_patch}.tar.gz
-# NoSource0-md5:	a18532c8457f1140964c4d896a928c96
+Source0:	http://download.macromedia.com/pub/labs/flashplayer9_update/FP9_plugin_beta_101806.tar.gz
+# NoSource0-md5:	0b234c5d0eaf254ef8af364fb9ed97f2
 %else
 Source0:	license-installer.sh
+# NoSource0-md5:	0b234c5d0eaf254ef8af364fb9ed97f2
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
@@ -57,12 +58,12 @@ Obs³ugiwane przegl±darki: %{browsers}.
 
 %prep
 %if %{with license_agreement}
-%setup -q -n install_flash_player_7_linux
-ver=$(awk '/^Version/{print $2}' Readme.txt)
-if [ "$ver" != %{version} ]; then
-	: This tarball is not version %{version}. Source mentions version $ver. Something wrong
-	exit 1
-fi
+%setup -q -n flash-player-plugin-%{_ver_major}.%{_ver_minor}.%{_ver_patch}.%{_ver_serial}
+#ver=$(awk '/^Version/{print $2}' Readme.txt)
+#if [ "$ver" != %{version} ]; then
+#	: This tarball is not version %{version}. Source mentions version $ver. Something wrong
+#	exit 1
+#fi
 %endif
 
 %install
@@ -83,7 +84,7 @@ install %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
 %else
 
 install -d $RPM_BUILD_ROOT%{_plugindir}
-install *.{so,xpt} $RPM_BUILD_ROOT%{_plugindir}
+install *.so $RPM_BUILD_ROOT%{_plugindir}
 
 %endif
 
@@ -97,16 +98,16 @@ rm -rf $RPM_BUILD_ROOT
 %else
 
 %triggerin -- mozilla-firefox
-%nsplugin_install -d %{_libdir}/mozilla-firefox/plugins libflashplayer.so flashplayer.xpt
+%nsplugin_install -d %{_libdir}/mozilla-firefox/plugins libflashplayer.so
 
 %triggerun -- mozilla-firefox
-%nsplugin_uninstall -d %{_libdir}/mozilla-firefox/plugins libflashplayer.so flashplayer.xpt
+%nsplugin_uninstall -d %{_libdir}/mozilla-firefox/plugins libflashplayer.so
 
 %triggerin -- mozilla
-%nsplugin_install -d %{_libdir}/mozilla/plugins libflashplayer.so flashplayer.xpt
+%nsplugin_install -d %{_libdir}/mozilla/plugins libflashplayer.so
 
 %triggerun -- mozilla
-%nsplugin_uninstall -d %{_libdir}/mozilla/plugins libflashplayer.so flashplayer.xpt
+%nsplugin_uninstall -d %{_libdir}/mozilla/plugins libflashplayer.so
 
 %triggerin -- konqueror
 %nsplugin_install -d %{_libdir}/kde3/plugins/konqueror libflashplayer.so
@@ -121,10 +122,10 @@ rm -rf $RPM_BUILD_ROOT
 %nsplugin_uninstall -d %{_libdir}/opera/plugins libflashplayer.so
 
 %triggerin -- seamonkey
-%nsplugin_install -d %{_libdir}/seamonkey/plugins libflashplayer.so flashplayer.xpt
+%nsplugin_install -d %{_libdir}/seamonkey/plugins libflashplayer.so
 
 %triggerun -- seamonkey
-%nsplugin_uninstall -d %{_libdir}/seamonkey/plugins libflashplayer.so flashplayer.xpt
+%nsplugin_uninstall -d %{_libdir}/seamonkey/plugins libflashplayer.so
 
 # as rpm removes the old obsoleted package files after the triggers
 # above are ran, add another trigger to make the links there.
@@ -146,7 +147,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{base_name}
 
 %else
-%doc Readme.txt
+%doc *.txt
 %attr(755,root,root) %{_plugindir}/*.so
-%{_plugindir}/*.xpt
 %endif
