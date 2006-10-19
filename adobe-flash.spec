@@ -21,10 +21,10 @@ License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	http://download.macromedia.com/pub/labs/flashplayer9_update/FP9_plugin_beta_101806.tar.gz
-# NoSource0-md5:	0b234c5d0eaf254ef8af364fb9ed97f2
+# NoSource0-md5:	1bfb01700d68108d1577ded95f2e8040
 %else
 Source0:	license-installer.sh
-# NoSource0-md5:	0b234c5d0eaf254ef8af364fb9ed97f2
+# NoSource0-md5:	1bfb01700d68108d1577ded95f2e8040
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
@@ -47,7 +47,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define	browsers mozilla, mozilla-firefox, konqueror, opera, seamonkey
 
 %description
-Flash plugin for Netscape-compatible WWW browsers.
+Adobe(R) Flash(R) Player is the high-performance, lightweight, highly expressive
+client runtime that delivers powerful and consistent user experiences across
+major operating systems, browsers, mobile phones, and devices. Installed on
+over 700 million Internet-connected desktops and mobile devices, Flash Player
+enables organizations and individuals to build and deliver great digital
+experiences to their end users.
 
 Supported browsers: %{browsers}.
 
@@ -59,11 +64,6 @@ Obs³ugiwane przegl±darki: %{browsers}.
 %prep
 %if %{with license_agreement}
 %setup -q -n flash-player-plugin-%{_ver_major}.%{_ver_minor}.%{_ver_patch}.%{_ver_serial}
-#ver=$(awk '/^Version/{print $2}' Readme.txt)
-#if [ "$ver" != %{version} ]; then
-#	: This tarball is not version %{version}. Source mentions version $ver. Something wrong
-#	exit 1
-#fi
 %endif
 
 %install
