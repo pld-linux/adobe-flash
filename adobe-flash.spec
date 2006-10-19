@@ -21,10 +21,10 @@ License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	http://download.macromedia.com/pub/labs/flashplayer9_update/FP9_plugin_beta_101806.tar.gz
-# NoSource0-md5:	1bfb01700d68108d1577ded95f2e8040
+# NoSource0-md5:	0b234c5d0eaf254ef8af364fb9ed97f2
 %else
 Source0:	license-installer.sh
-# NoSource0-md5:	1bfb01700d68108d1577ded95f2e8040
+# NoSource0-md5:	0b234c5d0eaf254ef8af364fb9ed97f2
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
