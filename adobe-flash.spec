@@ -14,7 +14,7 @@ Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-%define		_rel 1
+%define		_rel 2
 Version:	%{_ver_major}.%{_ver_minor}.%{_ver_patch}.%{_ver_serial}
 Release:	%{_rel}%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
@@ -44,7 +44,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # TODO: galeon and skipstone.
 # use macro, otherwise extra LF inserted along with the ifarch
-%define	browsers mozilla, mozilla-firefox, konqueror, opera, seamonkey
+%define	browsers mozilla, mozilla-firefox, mozilla-firefox-bin, konqueror, opera, seamonkey
 
 %description
 Adobe(R) Flash(R) Player is the high-performance, lightweight, highly expressive
@@ -102,6 +102,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %triggerun -- mozilla-firefox
 %nsplugin_uninstall -d %{_libdir}/mozilla-firefox/plugins libflashplayer.so
+
+%triggerin -- mozilla-firefox-bin
+%nsplugin_install -d %{_libdir}/mozilla-firefox-bin/plugins libflashplayer.so
+
+%triggerun -- mozilla-firefox-bin
+%nsplugin_uninstall -d %{_libdir}/mozilla-firefox-bin/plugins libflashplayer.so
 
 %triggerin -- mozilla
 %nsplugin_install -d %{_libdir}/mozilla/plugins libflashplayer.so
