@@ -5,7 +5,7 @@
 %define		_ver_major	9
 %define		_ver_minor	0
 %define		_ver_patch	21
-%define		_ver_serial	55
+%define		_ver_serial	78
 %define		base_name	macromedia-flash
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape
@@ -20,11 +20,12 @@ Release:	%{_rel}%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://download.macromedia.com/pub/labs/flashplayer9_update/FP9_plugin_beta_101806.tar.gz
-# NoSource0-md5:	0b234c5d0eaf254ef8af364fb9ed97f2
+#Source0:	http://download.macromedia.com/pub/labs/flashplayer9_update/FP9_plugin_beta_101806.tar.gz
+Source0:	http://download.macromedia.com/pub/labs/flashplayer9_update/FP9_plugin_beta_112006.tar.gz
+# NoSource0-md5:	3ab408f85ae6d8180cc913edf97bf3eb
 %else
 Source0:	license-installer.sh
-# NoSource0-md5:	0b234c5d0eaf254ef8af364fb9ed97f2
+# NoSource0-md5:	3ab408f85ae6d8180cc913edf97bf3eb
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
