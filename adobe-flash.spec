@@ -27,7 +27,7 @@ Source0:	http://download.macromedia.com/pub/labs/flashplayer9_update/FP9_plugin_
 Source0:	license-installer.sh
 # NoSource0-md5:	3ab408f85ae6d8180cc913edf97bf3eb
 %endif
-URL:		http://www.adobe.com/products/flashplayer/
+URL:		http://labs.adobe.com/technologies/flashplayer9/
 %if %{with license_agreement}
 BuildRequires:	rpmbuild(macros) >= 1.236
 Requires:	browser-plugins(%{_target_base_arch})
