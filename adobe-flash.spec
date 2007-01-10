@@ -41,6 +41,8 @@ Obsoletes:	mozilla-plugin-macromedia-flash
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_sysconfdir	/etc/adobe
+
 %description
 Adobe(R) Flash(R) Player is the high-performance, lightweight, highly expressive
 client runtime that delivers powerful and consistent user experiences across
@@ -59,7 +61,7 @@ Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%if !%{with license_agreement}
+%if %{without license_agreement}
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{base_name}}
 
 sed -e '
@@ -74,7 +76,12 @@ install %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
 
 %else
 
-install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_browserpluginsdir}}
+cat <<'EOF' > $RPM_BUILD_ROOT%{_sysconfdir}/mms.cfg
+# http://www.adobe.com/cfusion/knowledgebase/index.cfm?id=16701594
+AutoUpdateDisable=1
+AutoUpdateInterval=0
+EOF
 install *.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 
 %endif
@@ -102,5 +109,7 @@ fi
 %{_datadir}/%{base_name}
 %else
 %doc *.txt
+%dir %{_sysconfdir}
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mms.cfg
 %attr(755,root,root) %{_browserpluginsdir}/*.so
 %endif
