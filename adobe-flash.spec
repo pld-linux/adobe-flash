@@ -26,7 +26,7 @@ Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_
 Source0:	license-installer.sh
 # NoSource0-md5:	76b38231a68995935185aa42dfda9db7
 %endif
-URL:		http://labs.adobe.com/technologies/flashplayer9/
+URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
 BuildRequires:	rpmbuild(macros) >= 1.357
 Requires:	browser-plugins >= 2.0
