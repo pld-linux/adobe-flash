@@ -35,6 +35,7 @@ Requires:	rpm-build-tools
 %endif
 Obsoletes:	flash-plugin
 Obsoletes:	konqueror-plugin-macromedia-flash
+Obsoletes:	macromedia-flash
 Obsoletes:	mozilla-firefox-plugin-macromedia-flash
 Obsoletes:	mozilla-plugin-macromedia-flash
 ExclusiveArch:	%{ix86}
@@ -43,12 +44,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_sysconfdir	/etc/adobe
 
 %description
-Adobe(R) Flash(R) Player is the high-performance, lightweight, highly expressive
-client runtime that delivers powerful and consistent user experiences across
-major operating systems, browsers, mobile phones, and devices. Installed on
-over 700 million Internet-connected desktops and mobile devices, Flash Player
-enables organizations and individuals to build and deliver great digital
-experiences to their end users.
+Adobe(R) Flash(R) Player is the high-performance, lightweight, highly
+expressive client runtime that delivers powerful and consistent user
+experiences across major operating systems, browsers, mobile phones,
+and devices. Installed on over 700 million Internet-connected desktops
+and mobile devices, Flash Player enables organizations and individuals
+to build and deliver great digital experiences to their end users.
 
 %description -l pl
 Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape.
