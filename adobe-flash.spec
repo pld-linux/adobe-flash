@@ -33,6 +33,7 @@ Requires:	browser-plugins >= 2.0
 %else
 Requires:	rpm-build-tools
 %endif
+Provides:	macromedia-flash
 Obsoletes:	flash-plugin
 Obsoletes:	konqueror-plugin-macromedia-flash
 Obsoletes:	macromedia-flash
