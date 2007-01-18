@@ -6,7 +6,7 @@
 %define		_ver_minor	0
 %define		_ver_patch	31
 %define		_ver_serial	0
-%define		base_name	macromedia-flash
+%define		base_name	adobe-flash
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl):	Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape
 %if %{with license_agreement}
