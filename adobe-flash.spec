@@ -8,7 +8,7 @@
 %define		_ver_serial	0
 %define		base_name	adobe-flash
 Summary:	Flash plugin for Netscape-compatible WWW browsers
-Summary(pl):	Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape
+Summary(pl.UTF-8):   Wtyczka Flash dla przeglƒÖdarek WWW zgodnych z Netscape
 %if %{with license_agreement}
 Name:		%{base_name}
 %else
@@ -48,9 +48,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Adobe(R) Flash(R) Player 9 for Linux - the next-generation client
 runtime for engaging with Flash content and applications on Linux.
 
-%description -l pl
-Adobe(R) Flash(R) Player - ∂rodowisko nowej generacji do obs≥ugi
-tre∂ci i aplikacji we Flashu pod Linuksem.
+%description -l pl.UTF-8
+Adobe(R) Flash(R) Player - ≈õrodowisko nowej generacji do obs≈Çugi
+tre≈õci i aplikacji we Flashu pod Linuksem.
 
 %prep
 %if %{with license_agreement}
