@@ -8,7 +8,7 @@
 %define		_ver_serial	0
 %define		base_name	adobe-flash
 Summary:	Flash plugin for Netscape-compatible WWW browsers
-Summary(pl.UTF-8):   Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
+Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
 Name:		%{base_name}
 %else
