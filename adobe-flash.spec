@@ -30,6 +30,8 @@ URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
 BuildRequires:	rpmbuild(macros) >= 1.357
 Requires:	browser-plugins >= 2.0
+# apparently dlopened by player
+Requires:	libasound.so.2
 %else
 Requires:	rpm-build-tools
 %endif
