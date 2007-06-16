@@ -5,7 +5,7 @@
 %define		_ver_major	9
 %define		_ver_minor	0
 %define		_ver_patch	31
-%define		_ver_serial	0
+%define		_ver_serial	1
 %define		base_name	adobe-flash
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
@@ -20,11 +20,11 @@ Release:	%{_rel}%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_9_linux.tar.gz
-# NoSource0-md5:	76b38231a68995935185aa42dfda9db7
+Source0:	http://download.macromedia.com/pub/labs/flashplayer9_update/flashplayer9_install_linux_061107.tar.gz
+# NoSource0-md5:	
 %else
 Source0:	license-installer.sh
-# NoSource0-md5:	76b38231a68995935185aa42dfda9db7
+# NoSource0-md5:	
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
@@ -109,7 +109,6 @@ fi
 %attr(755,root,root) %{_bindir}/%{base_name}.install
 %{_datadir}/%{base_name}
 %else
-%doc *.txt
 %dir %{_sysconfdir}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mms.cfg
 %attr(755,root,root) %{_browserpluginsdir}/*.so
