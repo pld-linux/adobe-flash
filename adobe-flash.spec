@@ -4,8 +4,8 @@
 #
 %define		_ver_major	9
 %define		_ver_minor	0
-%define		_ver_patch	31
-%define		_ver_serial	1
+%define		_ver_patch	60
+%define		_ver_serial	0
 %define		base_name	adobe-flash
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
