@@ -21,10 +21,10 @@ License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_9_linux.tar.gz
-# NoSource0-md5:	76b38231a68995935185aa42dfda9db7
+# NoSource0-md5:	1bfb01700d68108d1577ded95f2e8040
 %else
 Source0:	license-installer.sh
-# NoSource0-md5:	76b38231a68995935185aa42dfda9db7
+# NoSource0-md5:	1bfb01700d68108d1577ded95f2e8040
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
