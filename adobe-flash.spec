@@ -21,10 +21,9 @@ License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	http://download.macromedia.com/pub/labs/flashplayer9_update/flashplayer9_install_linux_061107.tar.gz
-# NoSource0-md5:	
+# NoSource0-md5:	07009d177be812ed3bcfdef7aafb8dbc
 %else
-Source0:	license-installer.sh
-# NoSource0-md5:	
+Source1:	license-installer.sh
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
@@ -71,7 +70,7 @@ sed -e '
 	s-@VERSION@-%{version}-g
 	s-@RELEASE@-%{release}-g
 	s,@SPECFILE@,%{_datadir}/%{base_name}/%{base_name}.spec,g
-' %{SOURCE0} > $RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
+' %{SOURCE1} > $RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
 
 install %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
 
