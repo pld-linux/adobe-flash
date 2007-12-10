@@ -23,8 +23,7 @@ Group:		X11/Applications/Multimedia
 Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_9_linux.tar.gz
 # NoSource0-md5:	821cc72359a937caef85bb4cc74ef5cd
 %else
-Source0:	license-installer.sh
-# NoSource0-md5:	821cc72359a937caef85bb4cc74ef5cd
+Source1:	license-installer.sh
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
@@ -71,7 +70,7 @@ sed -e '
 	s-@VERSION@-%{version}-g
 	s-@RELEASE@-%{release}-g
 	s,@SPECFILE@,%{_datadir}/%{base_name}/%{base_name}.spec,g
-' %{SOURCE0} > $RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
+' %{SOURCE1} > $RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
 
 install %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
 
