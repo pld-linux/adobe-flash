@@ -2,11 +2,12 @@
 # Conditional build:
 %bcond_with	license_agreement	# generates package
 #
-%define		_ver_major	9
-%define		_ver_minor	0
-%define		_ver_patch	124
-%define		_ver_serial	0
+%define		ver_major	9
+%define		ver_minor	0
+%define		ver_patch	124
+%define		ver_serial	0
 %define		base_name	adobe-flash
+%define		rel 2
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
@@ -14,9 +15,8 @@ Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-%define		_rel 1
-Version:	%{_ver_major}.%{_ver_minor}.%{_ver_patch}.%{_ver_serial}
-Release:	%{_rel}%{?with_license_agreement:wla}
+Version:	%{ver_major}.%{ver_minor}.%{ver_patch}.%{ver_serial}
+Release:	%{rel}%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
@@ -56,7 +56,7 @@ treści i aplikacji we Flashu pod Linuksem.
 
 %prep
 %if %{with license_agreement}
-%setup -q -n install_flash_player_%{_ver_major}_linux
+%setup -q -n install_flash_player_%{ver_major}_linux
 %endif
 
 %install
