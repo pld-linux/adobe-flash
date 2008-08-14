@@ -7,7 +7,7 @@
 %define		ver_patch	0
 %define		ver_serial	0
 %define		base_name	adobe-flash
-%define		rel 3
+%define		rel 4
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
@@ -21,21 +21,22 @@ License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_install_linux_081108.tar.gz
-# NoSource0-md5:	
+# NoSource0-md5:	868fe510a1e9a6addfa8144c643cef48
 %else
 Source1:	license-installer.sh
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
 BuildRequires:	rpmbuild(macros) >= 1.357
+BuildRequires:	sed >= 4.0
 Requires:	browser-plugins >= 2.0
 # apparently dlopened by player
 Requires:	libasound.so.2
 %else
 Requires:	rpm-build-tools
 %endif
-Provides:	macromedia-flash
 Provides:	browser(flash)
+Provides:	macromedia-flash
 Obsoletes:	flash-plugin
 Obsoletes:	konqueror-plugin-macromedia-flash
 Obsoletes:	macromedia-flash
@@ -88,6 +89,9 @@ AutoUpdateInterval=0
 # OverrideGPUValidation=true
 EOF
 install *.so $RPM_BUILD_ROOT%{_browserpluginsdir}
+
+# HACK: Try if new ABI is compatible
+sed -i -e 's/libcurl\.so\.3/libcurl.so.4/g' $RPM_BUILD_ROOT%{_browserpluginsdir}/libflashplayer.so
 
 %endif
 
