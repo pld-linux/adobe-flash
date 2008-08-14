@@ -82,6 +82,7 @@ install %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_browserpluginsdir}}
 cat <<'EOF' > $RPM_BUILD_ROOT%{_sysconfdir}/mms.cfg
 # http://www.adobe.com/cfusion/knowledgebase/index.cfm?id=16701594
+# http://www.adobe.com/devnet/flashplayer/articles/flash_player_admin_guide.html
 AutoUpdateDisable=1
 AutoUpdateInterval=0
 # OverrideGPUValidation=true
