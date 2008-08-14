@@ -84,6 +84,7 @@ cat <<'EOF' > $RPM_BUILD_ROOT%{_sysconfdir}/mms.cfg
 # http://www.adobe.com/cfusion/knowledgebase/index.cfm?id=16701594
 AutoUpdateDisable=1
 AutoUpdateInterval=0
+# OverrideGPUValidation=true
 EOF
 install *.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 
