@@ -51,7 +51,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_enable_debug_packages	0
 
 %description
-Adobe(R) Flash(R) Player 9 for Linux - the next-generation client
+Adobe(R) Flash(R) Player for Linux - the next-generation client
 runtime for engaging with Flash content and applications on Linux.
 
 %description -l pl.UTF-8
