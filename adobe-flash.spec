@@ -7,7 +7,7 @@
 %define		ver_patch	0
 %define		ver_serial	0
 %define		base_name	adobe-flash
-%define		rel 4
+%define		rel 5
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
@@ -20,8 +20,8 @@ Release:	%{rel}%{?with_license_agreement:wla}
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_install_linux_081108.tar.gz
-# NoSource0-md5:	868fe510a1e9a6addfa8144c643cef48
+Source0:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_install_linux_091508.tar.gz
+# NoSource0-md5:	a0e471f87aa544ca6f2d032620111aba
 %else
 Source1:	license-installer.sh
 %endif
