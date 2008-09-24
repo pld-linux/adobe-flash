@@ -47,6 +47,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/adobe
 
+# So that building package on AC system won't write package name dep that Th system can't understand (libstdc++4)
+%define		_noautoreqdep	libstdc++.so.6
+
 # No debuginfo to be stored
 %define		_enable_debug_packages	0
 
