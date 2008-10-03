@@ -32,6 +32,7 @@ BuildRequires:	sed >= 4.0
 Requires:	browser-plugins >= 2.0
 # apparently dlopened by player
 Requires:	libasound.so.2
+Requires:	libcurl.so.4
 %else
 Requires:	rpm-build-tools
 %endif
