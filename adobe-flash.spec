@@ -33,7 +33,6 @@ Requires:	browser-plugins >= 2.0
 # apparently dlopened by player
 Requires:	libasound.so.2
 Requires:	libcurl.so.4
-Requires:	libnss3.so
 %else
 Requires:	rpm-build-tools
 %endif
