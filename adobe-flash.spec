@@ -30,7 +30,7 @@ URL:		http://www.adobe.com/products/flashplayer/
 BuildRequires:	rpmbuild(macros) >= 1.357
 BuildRequires:	sed >= 4.0
 Requires:	browser-plugins >= 2.0
-# apparently dlopened by player
+# dlopened by player
 Requires:	libasound.so.2
 Requires:	libcurl.so.4
 %else
@@ -93,10 +93,6 @@ AutoUpdateInterval=0
 # OverrideGPUValidation=true
 EOF
 install *.so $RPM_BUILD_ROOT%{_browserpluginsdir}
-
-# HACK: Try if new ABI is compatible
-sed -i -e 's/libcurl\.so\.3/libcurl.so.4/g' $RPM_BUILD_ROOT%{_browserpluginsdir}/libflashplayer.so
-
 %endif
 
 %clean
