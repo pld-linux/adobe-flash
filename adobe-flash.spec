@@ -2,10 +2,19 @@
 # Conditional build:
 %bcond_with	license_agreement	# generates package
 #
+%ifarch %{x8664}
 %define		ver_major	10
 %define		ver_minor	0
 %define		ver_patch	12
 %define		ver_serial	36
+%define		libmark		(64bit)
+%else
+%define         ver_major       10
+%define         ver_minor       0
+%define         ver_patch       d20
+%define         ver_serial      7
+%define		libmark		%{nil}
+%endif
 %define		base_name	adobe-flash
 %define		rel 1
 Summary:	Flash plugin for Netscape-compatible WWW browsers
@@ -22,8 +31,11 @@ Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz
 # NoSource0-md5:	4777665a6149af11233d8a000b89ffb1
+Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-10.0.d20.7.linux-x86_64.so.tar.gz
+# NoSource1-md5:	14c918ac5a9b9b680bdb37aedae40009
 %else
 Source1:	license-installer.sh
+# Source1-md5:	14c918ac5a9b9b680bdb37aedae40009
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
@@ -31,8 +43,8 @@ BuildRequires:	rpmbuild(macros) >= 1.357
 BuildRequires:	sed >= 4.0
 Requires:	browser-plugins >= 2.0
 # dlopened by player
-Requires:	libasound.so.2
-Requires:	libcurl.so.4
+Requires:	libasound.so.2%{libmark}
+Requires:	libcurl.so.4%{libmark}
 %else
 Requires:	rpm-build-tools
 %endif
@@ -43,7 +55,7 @@ Obsoletes:	konqueror-plugin-macromedia-flash
 Obsoletes:	macromedia-flash
 Obsoletes:	mozilla-firefox-plugin-macromedia-flash
 Obsoletes:	mozilla-plugin-macromedia-flash
-ExclusiveArch:	%{ix86}
+ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/adobe
@@ -64,7 +76,11 @@ treści i aplikacji we Flashu pod Linuksem.
 
 %prep
 %if %{with license_agreement}
-%setup -q -n install_flash_player_%{ver_major}_linux
+%ifarch %{x8664}
+%setup -q -T -c -b 1
+%else
+%setup -q -T -b 0 -n install_flash_player_%{ver_major}_linux
+%endif
 %endif
 
 %install
