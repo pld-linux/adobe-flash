@@ -34,8 +34,7 @@ Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_
 Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-10.0.d20.7.linux-x86_64.so.tar.gz
 # NoSource1-md5:	14c918ac5a9b9b680bdb37aedae40009
 %else
-Source1:	license-installer.sh
-# Source1-md5:	14c918ac5a9b9b680bdb37aedae40009
+Source2:	license-installer.sh
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
@@ -94,7 +93,7 @@ sed -e '
 	s-@VERSION@-%{version}-g
 	s-@RELEASE@-%{release}-g
 	s,@SPECFILE@,%{_datadir}/%{base_name}/%{base_name}.spec,g
-' %{SOURCE1} > $RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
+' %{SOURCE2} > $RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
 
 install %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
 
