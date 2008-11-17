@@ -3,16 +3,16 @@
 %bcond_with	license_agreement	# generates package
 #
 %ifarch %{x8664}
-%define		ver_major	10
-%define		ver_minor	0
-%define		ver_patch	12
-%define		ver_serial	36
-%define		libmark		(64bit)
-%else
 %define         ver_major       10
 %define         ver_minor       0
 %define         ver_patch       d20
 %define         ver_serial      7
+%define		libmark		()(64bit)
+%else
+%define		ver_major	10
+%define		ver_minor	0
+%define		ver_patch	12
+%define		ver_serial	36
 %define		libmark		%{nil}
 %endif
 %define		base_name	adobe-flash
