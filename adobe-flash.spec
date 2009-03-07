@@ -5,8 +5,8 @@
 %ifarch %{x8664}
 %define         ver_major       10
 %define         ver_minor       0
-%define         ver_patch       d21
-%define         ver_serial      1
+%define         ver_patch       22
+%define         ver_serial      87
 %define		libmark		()(64bit)
 %else
 %define		ver_major	10
@@ -26,13 +26,14 @@ Name:		%{base_name}-installer
 %endif
 Version:	%{ver_major}.%{ver_minor}.%{ver_patch}.%{ver_serial}
 Release:	%{rel}%{?with_license_agreement:wla}
+Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz
 # NoSource0-md5:	afab0b40b0ae11445e2e90a4a9224a8a
-Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-10.0.d21.1.linux-x86_64.so.tar.gz
-# NoSource1-md5:	c165af9d4e324bfaf6d1cfbdbe959fbb
+Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-10.0.22.87.linux-x86_64.so.tar.gz
+# NoSource1-md5:	492d98d25886afcaf18252334d4ac4e2
 %else
 Source2:	license-installer.sh
 %endif
