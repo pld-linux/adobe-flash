@@ -77,7 +77,7 @@ treści i aplikacji we Flashu pod Linuksem.
 %ifarch %{x8664}
 %setup -q -T -c -b 1
 %else
-%setup -q -T -b 0 -n install_flash_player_%{ver_major}_linux
+%setup -q -T -c -b 0
 %endif
 %endif
 
