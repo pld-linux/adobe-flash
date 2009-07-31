@@ -1,20 +1,18 @@
 #
 # Conditional build:
 %bcond_with	license_agreement	# generates package
-#
-%ifarch %{x8664}
-%define         ver_major       10
-%define         ver_minor       0
-%define         ver_patch       32
-%define         ver_serial      18
-%define		libmark		()(64bit)
-%else
+
 %define		ver_major	10
 %define		ver_minor	0
 %define		ver_patch	32
 %define		ver_serial	18
+
+%ifarch %{x8664}
+%define		libmark		()(64bit)
+%else
 %define		libmark		%{nil}
 %endif
+
 %define		base_name	adobe-flash
 %define		rel 1
 Summary:	Flash plugin for Netscape-compatible WWW browsers
@@ -32,7 +30,7 @@ Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz
 # NoSource0-md5:	6306980e40a3266b4b6c173bfcfdc946
-Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-10.0.32.18.linux-x86_64.so.tar.gz
+Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
 # NoSource1-md5:	332e60275e9c7a92059f286a2bad6e41
 %else
 Source2:	license-installer.sh
