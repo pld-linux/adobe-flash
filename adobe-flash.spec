@@ -79,6 +79,14 @@ treści i aplikacji we Flashu pod Linuksem.
 %else
 %setup -q -T -c -b 0
 %endif
+
+%build
+s='LNX %{ver_major},%{ver_minor},%{ver_patch},%{ver_serial}'
+v=$(strings libflashplayer.so | grep "$s")
+if [ "$v" != "$s" ]; then
+	: wrong version
+	exit 1
+fi
 %endif
 
 %install
