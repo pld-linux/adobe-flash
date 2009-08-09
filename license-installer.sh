@@ -1,9 +1,9 @@
 #!/bin/sh
 if [ "$1" = "--with" -a "$2" = "license_agreement" ]; then
 	tmp=$(mktemp -d)
-	SPECDIR=`rpm --define "_topdir $tmp" --eval "%{_specdir}"`
+	SPECDIR="$tmp/packages/@BASE_NAME@"
+	SOURCEDIR="$tmp/packages/@BASE_NAME@"
 	SRPMDIR=`rpm --define "_topdir $tmp" --eval "%{_srcrpmdir}"`
-	SOURCEDIR=`rpm --define "_topdir $tmp" --eval "%{_sourcedir}"`
 	BUILDDIR=`rpm --define "_topdir $tmp" --eval "%{_builddir}"`
 	RPMDIR=`rpm --define "_topdir $tmp" --eval "%{_rpmdir}"`
 	mkdir -p $SPECDIR $SRPMDIR $RPMDIR $SRPMDIR $SOURCEDIR $BUILDDIR
