@@ -14,7 +14,7 @@
 %endif
 
 %define		base_name	adobe-flash
-%define		rel 2
+%define		rel 3
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
@@ -44,7 +44,7 @@ Requires:	browser-plugins >= 2.0
 Requires:	libasound.so.2%{libmark}
 Requires:	libcurl.so.4%{libmark}
 %else
-Requires:	rpm-build-tools
+Requires:	rpm-build-tools >= 4.4.35
 %endif
 Provides:	browser(flash)
 Provides:	macromedia-flash
