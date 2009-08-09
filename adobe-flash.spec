@@ -1,63 +1,92 @@
 #
 # Conditional build:
 %bcond_with	license_agreement	# generates package
-#
-%define		_ver_major	7
-%define		_ver_minor	0
-%define		_ver_patch	63
-%define		_ver_serial	0
-%define		base_name	macromedia-flash
+
+%define		ver_major	10
+%define		ver_minor	0
+%define		ver_patch	32
+%define		ver_serial	18
+
+%ifarch %{x8664}
+%define		libmark		()(64bit)
+%else
+%define		libmark		%{nil}
+%endif
+
+%define		base_name	adobe-flash
+%define		rel 3
 Summary:	Flash plugin for Netscape-compatible WWW browsers
-Summary(pl):	Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape
+Summary(pl.UTF-8):	Wtyczka Flash dla przeglÄ…darek WWW zgodnych z Netscape
 %if %{with license_agreement}
 Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-%define		_rel 2
-Version:	%{_ver_major}.%{_ver_minor}.%{_ver_patch}.%{_ver_serial}
-Release:	%{_rel}%{?with_license_agreement:wla}
+Version:	%{ver_major}.%{ver_minor}.%{ver_patch}.%{ver_serial}
+Release:	%{rel}%{?with_license_agreement:wla}
+Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://distfiles.gentoo.org/distfiles/flash-plugin-%{_ver_major}.%{_ver_minor}.%{_ver_patch}.tar.gz
-# NoSource0-md5:	a835bc6613c76f62c74a50406bd5801d
+Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz
+# NoSource0-md5:	6306980e40a3266b4b6c173bfcfdc946
+Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
+# NoSource1-md5:	332e60275e9c7a92059f286a2bad6e41
 %else
-Source0:	license-installer.sh
+Source2:	license-installer.sh
 %endif
-URL:		http://www.macromedia.com/software/flashplayer/
+URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
-BuildRequires:	rpmbuild(macros) >= 1.236
-Requires:	browser-plugins(%{_target_cpu})
+BuildRequires:	rpmbuild(macros) >= 1.357
+BuildRequires:	sed >= 4.0
+Requires:	browser-plugins >= 2.0
+# dlopened by player
+Requires:	libasound.so.2%{libmark}
+Requires:	libcurl.so.4%{libmark}
 %else
-Requires:	rpm-build-tools
+Requires:	rpm-build-tools >= 4.4.35
 %endif
+Provides:	browser(flash)
+Provides:	macromedia-flash
 Obsoletes:	flash-plugin
 Obsoletes:	konqueror-plugin-macromedia-flash
+Obsoletes:	macromedia-flash
 Obsoletes:	mozilla-firefox-plugin-macromedia-flash
 Obsoletes:	mozilla-plugin-macromedia-flash
-ExclusiveArch:	%{ix86}
+ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_plugindir	%{_libdir}/browser-plugins
+%define		_sysconfdir	/etc/adobe
 
-# TODO: galeon and skipstone.
-# use macro, otherwise extra LF inserted along with the ifarch
-%define	browsers mozilla, mozilla-firefox, konqueror, opera
+# So that building package on AC system won't write package name dep that Th system can't understand (libstdc++4)
+%define		_noautoreqdep	libstdc++.so.6
+
+# No debuginfo to be stored
+%define		_enable_debug_packages	0
 
 %description
-Flash plugin for Netscape-compatible WWW browsers.
+Adobe(R) Flash(R) Player for Linux - the next-generation client
+runtime for engaging with Flash content and applications on Linux.
 
-Supported browsers: %{browsers}.
-
-%description -l pl
-Wtyczka Flash dla przegl±darek WWW zgodnych z Netscape.
-
-Obs³ugiwane przegl±darki: %{browsers}.
+%description -l pl.UTF-8
+Adobe(R) Flash(R) Player - Å›rodowisko nowej generacji do obsÅ‚ugi
+treÅ›ci i aplikacji we Flashu pod Linuksem.
 
 %prep
 %if %{with license_agreement}
-%setup -q -n install_flash_player_7_linux
+%ifarch %{x8664}
+%setup -q -T -c -b 1
+%else
+%setup -q -T -c -b 0
+%endif
+
+%build
+s='LNX %{ver_major},%{ver_minor},%{ver_patch},%{ver_serial}'
+v=$(strings libflashplayer.so | grep "$s")
+if [ "$v" != "$s" ]; then
+	: wrong version
+	exit 1
+fi
 %endif
 
 %install
@@ -71,15 +100,21 @@ sed -e '
 	s-@VERSION@-%{version}-g
 	s-@RELEASE@-%{release}-g
 	s,@SPECFILE@,%{_datadir}/%{base_name}/%{base_name}.spec,g
-' %{SOURCE0} > $RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
+' %{SOURCE2} > $RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
 
 install %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
 
 %else
 
-install -d $RPM_BUILD_ROOT%{_plugindir}
-install *.{so,xpt} $RPM_BUILD_ROOT%{_plugindir}
-
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_browserpluginsdir}}
+cat <<'EOF' > $RPM_BUILD_ROOT%{_sysconfdir}/mms.cfg
+# http://www.adobe.com/cfusion/knowledgebase/index.cfm?id=16701594
+# http://www.adobe.com/devnet/flashplayer/articles/flash_player_admin_guide.html
+AutoUpdateDisable=1
+AutoUpdateInterval=0
+# OverrideGPUValidation=true
+EOF
+install *.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 %endif
 
 %clean
@@ -88,74 +123,23 @@ rm -rf $RPM_BUILD_ROOT
 %if %{without license_agreement}
 %post
 %{_bindir}/%{base_name}.install
-
 %else
+%post
+%update_browser_plugins
 
-%triggerin -- mozilla-firefox
-%nsplugin_install -d %{_libdir}/mozilla-firefox/plugins libflashplayer.so flashplayer.xpt
-
-%triggerun -- mozilla-firefox
-%nsplugin_uninstall -d %{_libdir}/mozilla-firefox/plugins libflashplayer.so flashplayer.xpt
-
-%triggerin -- mozilla
-%nsplugin_install -d %{_libdir}/mozilla/plugins libflashplayer.so flashplayer.xpt
-if [ -d /usr/%{_lib}/mozilla ]; then
-	umask 022
-	rm -f /usr/%{_lib}/mozilla/components/{compreg,xpti}.dat
-	if [ -x /usr/bin/regxpcom ]; then
-		MOZILLA_FIVE_HOME=/usr/%{_lib}/mozilla /usr/bin/regxpcom
-	fi
+%postun
+if [ "$1" = 0 ]; then
+	%update_browser_plugins
 fi
-
-%triggerun -- mozilla
-%nsplugin_uninstall -d %{_libdir}/mozilla/plugins libflashplayer.so flashplayer.xpt
-if [ -d /usr/%{_lib}/mozilla ]; then
-	umask 022
-	rm -f /usr/%{_lib}/mozilla/components/{compreg,xpti}.dat
-	if [ -x /usr/bin/regxpcom ]; then
-		MOZILLA_FIVE_HOME=/usr/%{_lib}/mozilla /usr/bin/regxpcom
-	fi
-fi
-
-%triggerin -- konqueror
-%nsplugin_install -d %{_libdir}/kde3/plugins/konqueror libflashplayer.so
-
-%triggerun -- konqueror
-%nsplugin_uninstall -d %{_libdir}/kde3/plugins/konqueror libflashplayer.so
-
-%triggerin -- opera
-%nsplugin_install -d %{_libdir}/opera/plugins libflashplayer.so
-
-%triggerun -- opera
-%nsplugin_uninstall -d %{_libdir}/opera/plugins libflashplayer.so
-
-%triggerin -- seamonkey
-%nsplugin_install -d %{_libdir}/seamonkey/plugins libflashplayer.so
-
-%triggerun -- seamonkey
-%nsplugin_uninstall -d %{_libdir}/seamonkey/plugins libflashplayer.so
-
-# as rpm removes the old obsoleted package files after the triggers
-# above are ran, add another trigger to make the links there.
-%triggerpostun -- mozilla-firefox-plugin-macromedia-flash
-%nsplugin_install -f -d %{_libdir}/mozilla-firefox/plugins libflashplayer.so flashplayer.xpt
-
-%triggerpostun -- mozilla-plugin-macromedia-flash
-%nsplugin_install -f -d %{_libdir}/mozilla/plugins libflashplayer.so flashplayer.xpt
-
-%triggerpostun -- konqueror-plugin-macromedia-flash
-%nsplugin_install -f -d %{_libdir}/kde3/plugins/konqueror libflashplayer.so
 %endif
 
 %files
 %defattr(644,root,root,755)
-
 %if %{without license_agreement}
 %attr(755,root,root) %{_bindir}/%{base_name}.install
 %{_datadir}/%{base_name}
-
 %else
-%doc Readme.txt
-%attr(755,root,root) %{_plugindir}/*.so
-%{_plugindir}/*.xpt
+%dir %{_sysconfdir}
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mms.cfg
+%attr(755,root,root) %{_browserpluginsdir}/*.so
 %endif
