@@ -1,4 +1,7 @@
 #
+# INFO:
+# This beta release is only for 32bit systems
+#
 # Conditional build:
 %bcond_with	license_agreement	# generates package
 
@@ -14,7 +17,7 @@
 %endif
 
 %define		base_name	adobe-flash
-%define		rel 3
+%define		rel 1
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
@@ -53,7 +56,9 @@ Obsoletes:	konqueror-plugin-macromedia-flash
 Obsoletes:	macromedia-flash
 Obsoletes:	mozilla-firefox-plugin-macromedia-flash
 Obsoletes:	mozilla-plugin-macromedia-flash
-ExclusiveArch:	%{ix86} %{x8664}
+# See INFO
+#ExclusiveArch:	%{ix86} %{x8664}
+ExclusiveArch: %{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/adobe
