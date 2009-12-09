@@ -29,9 +29,9 @@ License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz
-# NoSource0-md5:	
+# NoSource0-md5:	aa694c7392d4519e4ef7812fd2922730
 Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
-# NoSource1-md5:	
+# NoSource1-md5:	8b427c2991c0447af56a951c653ee383
 %else
 Source2:	license-installer.sh
 %endif
