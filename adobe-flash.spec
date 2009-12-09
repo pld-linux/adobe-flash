@@ -3,9 +3,9 @@
 %bcond_with	license_agreement	# generates package
 
 %define		ver_major	10
-%define		ver_minor	0
-%define		ver_patch	32
-%define		ver_serial	18
+%define		ver_minor	1
+%define		ver_patch	51
+%define		ver_serial	45
 
 %ifarch %{x8664}
 %define		libmark		()(64bit)
@@ -28,10 +28,10 @@ Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz
+Source0:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_1_p1_linux_111709.tar.gz
 # NoSource0-md5:	6306980e40a3266b4b6c173bfcfdc946
-Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
-# NoSource1-md5:	332e60275e9c7a92059f286a2bad6e41
+#Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
+## NoSource1-md5:	332e60275e9c7a92059f286a2bad6e41
 %else
 Source2:	license-installer.sh
 %endif
@@ -74,13 +74,14 @@ treści i aplikacji we Flashu pod Linuksem.
 
 %prep
 %if %{with license_agreement}
-%ifarch %{x8664}
-%setup -q -T -c -b 1
-%else
+#%ifarch %{x8664}
+#%setup -q -T -c -b 1
+#%else
 %setup -q -T -c -b 0
-%endif
+#%endif
 
 %build
+cd install_flash_player_10_linux
 s='LNX %{ver_major},%{ver_minor},%{ver_patch},%{ver_serial}'
 v=$(strings libflashplayer.so | grep "$s")
 if [ "$v" != "$s" ]; then
@@ -114,7 +115,7 @@ AutoUpdateDisable=1
 AutoUpdateInterval=0
 # OverrideGPUValidation=true
 EOF
-install *.so $RPM_BUILD_ROOT%{_browserpluginsdir}
+install install_flash_player_10_linux/*.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 %endif
 
 %clean
