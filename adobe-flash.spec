@@ -101,6 +101,7 @@ sed -e '
 	s-@VERSION@-%{version}-g
 	s-@RELEASE@-%{release}-g
 	s,@SPECFILE@,%{_datadir}/%{base_name}/%{base_name}.spec,g
+	s,@DATADIR@,%{_datadir}/%{base_name},g
 ' %{SOURCE2} > $RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
 
 install %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
