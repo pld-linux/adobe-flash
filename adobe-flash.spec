@@ -33,7 +33,8 @@ Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_
 Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
 # NoSource1-md5:	8b427c2991c0447af56a951c653ee383
 %else
-Source2:	license-installer.sh
+Source2:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
+# Source2-md5: 4fb1600353dd57fe088e0b12fb0ecac2
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
