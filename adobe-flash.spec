@@ -14,7 +14,7 @@
 %endif
 
 %define		base_name	adobe-flash
-%define		rel 1
+%define		rel 2
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
@@ -34,7 +34,7 @@ Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{
 # NoSource1-md5:	4a4561e456612a6751653b58342d53df
 %else
 Source2:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
-# Source2-md5: 4fb1600353dd57fe088e0b12fb0ecac2
+# Source2-md5:	329c25f457fea66ec502b7ef70cb9ede
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
@@ -45,7 +45,8 @@ Requires:	browser-plugins >= 2.0
 Requires:	libasound.so.2%{libmark}
 Requires:	libcurl.so.4%{libmark}
 %else
-Requires:	rpm-build-tools >= 4.4.35
+Requires:	rpm-build-macros >= 1.544
+Requires:	rpm-build-tools >= 4.4.37
 %endif
 Provides:	browser(flash)
 Provides:	macromedia-flash
