@@ -7,8 +7,8 @@
 
 %define		ver_major	10
 %define		ver_minor	1
-%define		ver_patch	51
-%define		ver_serial	45
+%define		ver_patch	53
+%define		ver_serial	21
 
 %ifarch %{x8664}
 %define		libmark		()(64bit)
@@ -17,7 +17,7 @@
 %endif
 
 %define		base_name	adobe-flash
-%define		rel 1
+%define		rel 0.1
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
@@ -31,8 +31,8 @@ Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_1_p1_linux_111709.tar.gz
-# NoSource0-md5:	6306980e40a3266b4b6c173bfcfdc946
+Source0:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_1_rc2_linux_041910.tar.gz
+# NoSource0-md5:	b9578f0d9a1bbdc574bd7c4c2680c5c9
 #Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
 ## NoSource1-md5:	332e60275e9c7a92059f286a2bad6e41
 %else
@@ -86,7 +86,6 @@ treści i aplikacji we Flashu pod Linuksem.
 #%endif
 
 %build
-cd install_flash_player_10_linux
 s='LNX %{ver_major},%{ver_minor},%{ver_patch},%{ver_serial}'
 v=$(strings libflashplayer.so | grep "$s")
 if [ "$v" != "$s" ]; then
@@ -120,7 +119,7 @@ AutoUpdateDisable=1
 AutoUpdateInterval=0
 # OverrideGPUValidation=true
 EOF
-install install_flash_player_10_linux/*.so $RPM_BUILD_ROOT%{_browserpluginsdir}
+install *.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 %endif
 
 %clean
