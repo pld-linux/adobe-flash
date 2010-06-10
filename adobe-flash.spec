@@ -3,9 +3,9 @@
 %bcond_with	license_agreement	# generates package
 
 %define		ver_major	10
-%define		ver_minor	0
-%define		ver_patch	45
-%define		ver_serial	2
+%define		ver_minor	1
+%define		ver_patch	53
+%define		ver_serial	64
 
 %ifarch %{x8664}
 %define		libmark		()(64bit)
@@ -14,7 +14,7 @@
 %endif
 
 %define		base_name	adobe-flash
-%define		rel 2
+%define		rel 0.1
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
@@ -28,12 +28,12 @@ Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz
-# NoSource0-md5:	dbfc776cd4310250cde078e0bf0472e7
+Source0:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_1_rc7_linux_060210.so.tar.gz
+# NoSource0-md5:	e4cb4d26124605a54c3d498cc440368f
 NoSource:	0
-Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
+#Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
 # NoSource1-md5:	4a4561e456612a6751653b58342d53df
-NoSource:	1
+#NoSource:	1
 %else
 Source2:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
 # Source2-md5:	329c25f457fea66ec502b7ef70cb9ede
