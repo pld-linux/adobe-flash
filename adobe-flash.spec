@@ -47,8 +47,8 @@ Requires:	browser-plugins >= 2.0
 Requires:	libasound.so.2%{libmark}
 Requires:	libcurl.so.4%{libmark}
 %else
-Requires:	rpm-build-macros >= 1.544
 Requires:	rpm-build-tools >= 4.4.37
+Requires:	rpmbuild(macros) >= 1.544
 %endif
 Provides:	browser(flash)
 Provides:	macromedia-flash
