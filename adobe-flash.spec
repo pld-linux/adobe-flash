@@ -36,7 +36,7 @@ NoSource:	0
 #NoSource:	1
 %else
 Source2:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
-# Source2-md5:	329c25f457fea66ec502b7ef70cb9ede
+# Source2-md5:	4fb1600353dd57fe088e0b12fb0ecac2
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
