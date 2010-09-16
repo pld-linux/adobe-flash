@@ -2,14 +2,17 @@
 # Conditional build:
 %bcond_with	license_agreement	# generates package
 
+%ifarch %{x8664}
+%define		ver_major	10
+%define		ver_minor	2
+%define		ver_patch	161
+%define		ver_serial	22
+%define		libmark		()(64bit)
+%else
 %define		ver_major	10
 %define		ver_minor	1
 %define		ver_patch	82
 %define		ver_serial	76
-
-%ifarch %{x8664}
-%define		libmark		()(64bit)
-%else
 %define		libmark		%{nil}
 %endif
 
@@ -29,14 +32,15 @@ License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz
-# NoSource0-md5:	7f122a6bf62403c2916f37df48c18768
+# NoSource0-md5:	e4cb4d26124605a54c3d498cc440368f
 NoSource:	0
 #Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
-# NoSource1-md5:	4a4561e456612a6751653b58342d53df
-#NoSource:	1
+Source1:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer_square_p1_64bit_linux_091510.tar.gz
+# NoSource1-md5:	338e954c02ba6776b6b8a908e6f96b5f
+NoSource:	1
 %else
 Source2:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
-# Source2-md5:	4fb1600353dd57fe088e0b12fb0ecac2
+# Source2-md5:	329c25f457fea66ec502b7ef70cb9ede
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
@@ -57,8 +61,7 @@ Obsoletes:	konqueror-plugin-macromedia-flash
 Obsoletes:	macromedia-flash
 Obsoletes:	mozilla-firefox-plugin-macromedia-flash
 Obsoletes:	mozilla-plugin-macromedia-flash
-ExclusiveArch:	%{ix86}
-# %{x8664}
+ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/adobe
