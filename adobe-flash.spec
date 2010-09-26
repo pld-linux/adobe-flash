@@ -4,8 +4,8 @@
 
 %define		ver_major	10
 %define		ver_minor	1
-%define		ver_patch	82
-%define		ver_serial	76
+%define		ver_patch	85
+%define		ver_serial	3
 
 %ifarch %{x8664}
 %define		libmark		()(64bit)
@@ -29,7 +29,7 @@ License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz
-# NoSource0-md5:	7f122a6bf62403c2916f37df48c18768
+# NoSource0-md5:	d3d8f82384325c2adfb4cfd5ef173d7f
 NoSource:	0
 #Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
 # NoSource1-md5:	4a4561e456612a6751653b58342d53df
@@ -58,7 +58,6 @@ Obsoletes:	macromedia-flash
 Obsoletes:	mozilla-firefox-plugin-macromedia-flash
 Obsoletes:	mozilla-plugin-macromedia-flash
 ExclusiveArch:	%{ix86}
-# %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/adobe
@@ -87,7 +86,7 @@ treści i aplikacji we Flashu pod Linuksem.
 
 %build
 s='LNX %{ver_major},%{ver_minor},%{ver_patch},%{ver_serial}'
-v=$(strings libflashplayer.so | grep "$s")
+v=$(strings libflashplayer.so | grep '^LNX ')
 if [ "$v" != "$s" ]; then
 	: wrong version
 	exit 1
