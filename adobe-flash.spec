@@ -91,7 +91,7 @@ treści i aplikacji we Flashu pod Linuksem.
 
 %build
 s='LNX %{ver_major},%{ver_minor},%{ver_patch},%{ver_serial}'
-v=$(strings libflashplayer.so | grep "$s")
+v=$(strings libflashplayer.so | grep '^LNX ')
 if [ "$v" != "$s" ]; then
 	: wrong version
 	exit 1
