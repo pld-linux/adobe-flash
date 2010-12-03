@@ -4,9 +4,9 @@
 
 %ifarch %{x8664}
 %define		ver_major	10
-%define		ver_minor	2
-%define		ver_patch	161
-%define		ver_serial	23
+%define		ver_minor	3
+%define		ver_patch	162
+%define		ver_serial	29
 %define		libmark		()(64bit)
 %else
 %define		ver_major	10
@@ -32,12 +32,12 @@ License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 ##Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz
-Source0:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer_square_p2_32bit_linux_092710.tar.gz
-# NoSource0-md5:	b3cc7671ce5e62a687e7a22555f08611
+Source0:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_2_p2_32bit_linux_111710.tar.gz
+# NoSource0-md5:	3a5c1e0a77bb44d3456c933a056bcf47
 NoSource:	0
 ##Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
-Source1:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer_square_p2_64bit_linux_092710.tar.gz
-# NoSource1-md5:	a735a3c581337ed2a06a20714846645e
+Source1:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_2_p3_64bit_linux_111710.tar.gz
+# NoSource1-md5:	49b55c7eb8044453e5f6f2e4b3cb4084
 NoSource:	1
 %else
 Source2:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
