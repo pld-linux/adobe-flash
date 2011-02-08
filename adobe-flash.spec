@@ -2,18 +2,13 @@
 # Conditional build:
 %bcond_with	license_agreement	# generates package
 
+%ifarch %{ix86}
+%define		ver		10.2.152.27
+%define		libmark	%{nil}
+%endif
 %ifarch %{x8664}
-%define		ver_major	10
-%define		ver_minor	3
-%define		ver_patch	162
-%define		ver_serial	29
-%define		libmark		()(64bit)
-%else
-%define		ver_major	10
-%define		ver_minor	2
-%define		ver_patch	151
-%define		ver_serial	49
-%define		libmark		%{nil}
+%define		ver		10.3.162.29
+%define		libmark	()(64bit)
 %endif
 
 %define		base_name	adobe-flash
@@ -25,15 +20,16 @@ Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-Version:	%{ver_major}.%{ver_minor}.%{ver_patch}.%{ver_serial}
+Version:	%{ver}
 Release:	%{rel}%{?with_license_agreement:wla}
 Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-##Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz
-Source0:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_2_p2_32bit_linux_111710.tar.gz
-# NoSource0-md5:	3a5c1e0a77bb44d3456c933a056bcf47
+#Source0:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_2_p2_32bit_linux_111710.tar.gz
+#Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/flash-plugin-%{version}-release.i386.rpm
+Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz
+# NoSource0-md5:	e9fc57403796a4992474e4f25857ca14
 NoSource:	0
 ##Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
 Source1:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_2_p3_64bit_linux_111710.tar.gz
@@ -90,7 +86,7 @@ treści i aplikacji we Flashu pod Linuksem.
 %endif
 
 %build
-s='LNX %{ver_major},%{ver_minor},%{ver_patch},%{ver_serial}'
+s=$(echo 'LNX %{version}' | tr . ,)
 v=$(strings libflashplayer.so | grep '^LNX ')
 if [ "$v" != "$s" ]; then
 	: wrong version
