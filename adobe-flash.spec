@@ -35,9 +35,10 @@ NoSource:	0
 Source1:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_2_p3_64bit_linux_111710.tar.gz
 # NoSource1-md5:	49b55c7eb8044453e5f6f2e4b3cb4084
 NoSource:	1
+Source2:	mms.cfg
 %else
-Source2:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
-# Source2-md5:	329c25f457fea66ec502b7ef70cb9ede
+Source3:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
+# Source3-md5:	329c25f457fea66ec502b7ef70cb9ede
 %endif
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
@@ -106,21 +107,15 @@ sed -e '
 	s-@RELEASE@-%{release}-g
 	s,@SPECFILE@,%{_datadir}/%{base_name}/%{base_name}.spec,g
 	s,@DATADIR@,%{_datadir}/%{base_name},g
-' %{SOURCE2} > $RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
+' %{SOURCE3} > $RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
 
-install %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
+cp -p %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
 
 %else
 
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_browserpluginsdir}}
-cat <<'EOF' > $RPM_BUILD_ROOT%{_sysconfdir}/mms.cfg
-# http://www.adobe.com/cfusion/knowledgebase/index.cfm?id=16701594
-# http://www.adobe.com/devnet/flashplayer/articles/flash_player_admin_guide.html
-AutoUpdateDisable=1
-AutoUpdateInterval=0
-# OverrideGPUValidation=true
-EOF
-install *.so $RPM_BUILD_ROOT%{_browserpluginsdir}
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/mms.cfg
+install -p *.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 %endif
 
 %clean
