@@ -40,6 +40,7 @@ Source2:	mms.cfg
 Source3:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
 # Source3-md5:	329c25f457fea66ec502b7ef70cb9ede
 %endif
+Source4:	memcpy-to-memmove.sh
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
 BuildRequires:	rpmbuild(macros) >= 1.357
@@ -93,6 +94,14 @@ if [ "$v" != "$s" ]; then
 	: wrong version
 	exit 1
 fi
+
+%ifarch %{x8664}
+# Bug #354073: Patch binary to use memmove instead of memcpy from
+# Redhat's bug https://bugzilla.redhat.com/show_bug.cgi?id=638477#c94
+cp libflashplayer.so libflashplayer.so.orig
+/bin/bash %{SOURCE4} libflashplayer.so \
+|| (echo "memcpy-to-memmove.sh failed" && exit 1)
+%endif
 %endif
 
 %install
