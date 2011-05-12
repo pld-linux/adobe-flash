@@ -3,7 +3,7 @@
 %bcond_with	license_agreement	# generates package
 
 %ifarch %{ix86}
-%define		ver		10.3.181.5
+%define		ver		10.3.181.14
 %define		libmark	%{nil}
 %endif
 %ifarch %{x8664}
@@ -26,8 +26,9 @@ Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer10-3/flashplayer10-3_rc1_lin_042011.tar.gz
-# NoSource0-md5:	e06589f86c6a4ad00fb27507a2e66aaf
+#Source0:	http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer10-3/flashplayer10-3_rc1_lin_042011.tar.gz
+Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz
+# NoSource0-md5:	e090aaaa5bc2475e024cd13e0ec4e9c1
 NoSource:	0
 ##Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
 Source1:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_2_p3_64bit_linux_111710.tar.gz
