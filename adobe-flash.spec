@@ -30,11 +30,11 @@ License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 #Source0:	http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer10-3/flashplayer10-3_rc1_lin_042011.tar.gz
-Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz#/%{name}-%{ver32}.tgz
+Source0:	http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz#/%{base_name}-%{ver32}.tgz
 # NoSource0-md5:	26770108412158b710e633b06a71ca25
 NoSource:	0
 ##Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
-Source1:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_2_p3_64bit_linux_111710.tar.gz#/%{name}64-%{ver64}.tgz
+Source1:	http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_2_p3_64bit_linux_111710.tar.gz#/%{base_name}64-%{ver64}.tgz
 # NoSource1-md5:	49b55c7eb8044453e5f6f2e4b3cb4084
 NoSource:	1
 Source2:	mms.cfg
