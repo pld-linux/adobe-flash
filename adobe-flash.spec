@@ -15,7 +15,7 @@
 %endif
 
 %define		base_name	adobe-flash
-%define		rel 0.1
+%define		rel 1
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
@@ -124,9 +124,11 @@ cp -p %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
 
 %else
 
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_browserpluginsdir}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_browserpluginsdir},%{_bindir},%{_desktopdir}}
 cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/mms.cfg
 install -p *.so $RPM_BUILD_ROOT%{_browserpluginsdir}
+install usr/bin/flash-player-properties $RPM_BUILD_ROOT%{_bindir}
+install usr/share/applications/flash-player-properties.desktop $RPM_BUILD_ROOT%{_desktopdir}/flash-player-properties.desktop
 %endif
 
 %clean
@@ -153,5 +155,7 @@ fi
 %else
 %dir %{_sysconfdir}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mms.cfg
+%attr(755,root,root) %{_bindir}/flash-player-properties
 %attr(755,root,root) %{_browserpluginsdir}/*.so
+%{_desktopdir}/flash-player-properties.desktop
 %endif
