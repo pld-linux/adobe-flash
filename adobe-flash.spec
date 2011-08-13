@@ -2,8 +2,8 @@
 # Conditional build:
 %bcond_with	license_agreement	# generates package
 
-%define		ver32	11.0.1.60
-%define		ver64	11.0.1.60
+%define		ver32	11.0.1.98
+%define		ver64	11.0.1.98
 
 %ifarch %{ix86}
 %define		version	%{ver32}
@@ -30,12 +30,12 @@ License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 #Source0:	http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer10-3/flashplayer10-3_rc1_lin_042011.tar.gz
-Source0:	http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer11/flashplayer11_b1_install_lin_32_071311.tar.gz#/%{base_name}-%{ver32}.tgz
-# NoSource0-md5:	8816dfa0bbb4210df5a37e061834c24a
+Source0:	http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer11/flashplayer11_b2_install_lin_32_080811.tar.gz#/%{base_name}-%{ver32}.tgz
+# NoSource0-md5:	285d585fd6bbf6bdaf16d404dceaa761
 NoSource:	0
 ##Source1:	http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-%{version}.linux-x86_64.so.tar.gz
-Source1:	http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer11/flashplayer11_b1_install_lin_64_071311.tar.gz#/%{base_name}64-%{ver64}.tgz
-# NoSource1-md5:	806b348cfb27054568d9f63d13bee3fd
+Source1:	http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer11/flashplayer11_b2_install_lin_64_080811.tar.gz#/%{base_name}64-%{ver64}.tgz
+# NoSource1-md5:	87ccb674fbcf94739f82cc6089634623
 NoSource:	1
 Source2:	mms.cfg
 %else
