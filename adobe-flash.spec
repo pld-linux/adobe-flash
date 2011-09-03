@@ -15,7 +15,7 @@
 %endif
 
 %define		base_name	adobe-flash
-%define		rel 1
+%define		rel 2
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
@@ -95,6 +95,7 @@ if [ "$v" != "$s" ]; then
 	: wrong version
 	exit 1
 fi
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
