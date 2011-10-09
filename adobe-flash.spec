@@ -1,9 +1,11 @@
 #
+# TODO: package kde4 component
+#
 # Conditional build:
 %bcond_with	license_agreement	# generates package
-# 11.0.r1.129
-%define		ver32	11.0.1.129
-%define		ver64	11.0.1.129
+
+%define		ver32	11.0.1.152
+%define		ver64	11.0.1.152
 
 %ifarch %{ix86}
 %define		version	%{ver32}
@@ -15,7 +17,7 @@
 %endif
 
 %define		base_name	adobe-flash
-%define		rel 2
+%define		rel 1
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
@@ -29,12 +31,11 @@ Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-#               http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer11/flashplayer11_rc1_install_lin_32_090611.tar.gz
-Source0:	http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer11/flashplayer11_rc1_install_lin_32_090611.tar.gz#/%{base_name}-%{ver32}.tgz
-# NoSource0-md5:	2a780926255d88f39f3b007f3d342e0d
+Source0:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver32}/install_flash_player_11_linux.i386.tar.gz
+# NoSource0-md5:	34051edfcb78e6db14567a6c5f53e161
 NoSource:	0
-Source1:	http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer11/flashplayer11_rc1_install_lin_64_090611.tar.gz#/%{base_name}64-%{ver64}.tgz
-# NoSource1-md5:	fd9bea881552223ddd73ccd84d2cd459
+Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver32}/install_flash_player_11_linux.x86_64.tar.gz
+# NoSource1-md5:	782952c5730caa4e4cbe7e1d9dfa6214
 NoSource:	1
 Source2:	mms.cfg
 %else
@@ -49,6 +50,7 @@ Requires:	browser-plugins >= 2.0
 # dlopened by player
 Requires:	libasound.so.2%{libmark}
 Requires:	libcurl.so.4%{libmark}
+Requires:	hicolor-icon-theme
 %else
 Requires:	rpm-build-tools >= 4.4.37
 Requires:	rpmbuild(macros) >= 1.544
@@ -114,11 +116,12 @@ cp -p %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
 
 %else
 
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_browserpluginsdir},%{_bindir},%{_desktopdir}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_browserpluginsdir},%{_bindir},%{_desktopdir},%{_iconsdir}}
 cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/mms.cfg
 install -p *.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 install usr/bin/flash-player-properties $RPM_BUILD_ROOT%{_bindir}
 install usr/share/applications/flash-player-properties.desktop $RPM_BUILD_ROOT%{_desktopdir}/flash-player-properties.desktop
+cp -a usr/share/icons/* $RPM_BUILD_ROOT%{_iconsdir}
 %endif
 
 %clean
@@ -130,11 +133,13 @@ rm -rf $RPM_BUILD_ROOT
 %else
 %post
 %update_browser_plugins
+%update_icon_cache hicolor
 
 %postun
 if [ "$1" = 0 ]; then
 	%update_browser_plugins
 fi
+%update_icon_cache hicolor
 %endif
 
 %files
@@ -148,4 +153,5 @@ fi
 %attr(755,root,root) %{_bindir}/flash-player-properties
 %attr(755,root,root) %{_browserpluginsdir}/*.so
 %{_desktopdir}/flash-player-properties.desktop
+%{_iconsdir}/hicolor/*/apps/*.png
 %endif
