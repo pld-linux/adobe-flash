@@ -4,8 +4,8 @@
 # Conditional build:
 %bcond_with	license_agreement	# generates package
 
-%define		ver32	11.0.1.152
-%define		ver64	11.0.1.152
+%define		ver32	11.2.202.19
+%define		ver64	11.2.202.19
 
 %ifarch %{ix86}
 %define		version	%{ver32}
@@ -31,11 +31,11 @@ Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver32}/install_flash_player_11_linux.i386.tar.gz
-# NoSource0-md5:	34051edfcb78e6db14567a6c5f53e161
+Source0:	http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer11-2/flashplayer11-2_p1_install_lin_32_102611.tar.gz
+# NoSourceSource0-md5:	4e85ea589dc9ca6fc128380f64e21b70
 NoSource:	0
-Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver32}/install_flash_player_11_linux.x86_64.tar.gz
-# NoSource1-md5:	782952c5730caa4e4cbe7e1d9dfa6214
+Source1:	http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer11-2/flashplayer11-2_p1_install_lin_64_102611.tar.gz
+# NoSourceSource1-md5:	0569d9bef0025f3804b026f7a996e082
 NoSource:	1
 Source2:	mms.cfg
 %else
@@ -119,9 +119,9 @@ cp -p %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_browserpluginsdir},%{_bindir},%{_desktopdir},%{_iconsdir}}
 cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/mms.cfg
 install -p *.so $RPM_BUILD_ROOT%{_browserpluginsdir}
-install usr/bin/flash-player-properties $RPM_BUILD_ROOT%{_bindir}
-install usr/share/applications/flash-player-properties.desktop $RPM_BUILD_ROOT%{_desktopdir}/flash-player-properties.desktop
-cp -a usr/share/icons/* $RPM_BUILD_ROOT%{_iconsdir}
+#install usr/bin/flash-player-properties $RPM_BUILD_ROOT%{_bindir}
+#install usr/share/applications/flash-player-properties.desktop $RPM_BUILD_ROOT%{_desktopdir}/flash-player-properties.desktop
+#cp -a usr/share/icons/* $RPM_BUILD_ROOT%{_iconsdir}
 %endif
 
 %clean
@@ -150,8 +150,8 @@ fi
 %else
 %dir %{_sysconfdir}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mms.cfg
-%attr(755,root,root) %{_bindir}/flash-player-properties
+#%attr(755,root,root) %{_bindir}/flash-player-properties
 %attr(755,root,root) %{_browserpluginsdir}/*.so
-%{_desktopdir}/flash-player-properties.desktop
-%{_iconsdir}/hicolor/*/apps/*.png
+#%{_desktopdir}/flash-player-properties.desktop
+#%{_iconsdir}/hicolor/*/apps/*.png
 %endif
