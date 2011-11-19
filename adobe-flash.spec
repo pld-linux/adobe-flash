@@ -37,11 +37,11 @@ NoSource:	0
 Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver64}/install_flash_player_11_linux.x86_64.tar.gz
 # NoSource1-md5:	
 NoSource:	1
-Source2:	mms.cfg
 %else
 Source3:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
 # Source3-md5:	329c25f457fea66ec502b7ef70cb9ede
 %endif
+Source2:	mms.cfg
 URL:		http://www.adobe.com/products/flashplayer/
 %if %{with license_agreement}
 BuildRequires:	rpmbuild(macros) >= 1.357
