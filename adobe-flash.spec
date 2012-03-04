@@ -43,14 +43,15 @@ Source3:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
 %endif
 Source2:	mms.cfg
 URL:		http://www.adobe.com/products/flashplayer/
+Patch0:		desktop.patch
 %if %{with license_agreement}
 BuildRequires:	rpmbuild(macros) >= 1.357
 BuildRequires:	sed >= 4.0
 Requires:	browser-plugins >= 2.0
+Requires:	hicolor-icon-theme
 # dlopened by player
 Requires:	libasound.so.2%{libmark}
 Requires:	libcurl.so.4%{libmark}
-Requires:	hicolor-icon-theme
 %else
 Requires:	rpm-build-tools >= 4.4.37
 Requires:	rpmbuild(macros) >= 1.544
@@ -88,6 +89,7 @@ treści i aplikacji we Flashu pod Linuksem.
 %else
 %setup -q -T -c -b 0
 %endif
+%patch0 -p1
 
 %build
 s=$(echo 'LNX %{version}' | tr . ,)

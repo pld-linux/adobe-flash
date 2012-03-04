@@ -1,0 +1,9 @@
+--- adobe-flash-11.2.202.221/./usr/share/applications/flash-player-properties.desktop~	2012-02-23 01:57:28.000000000 +0200
++++ adobe-flash-11.2.202.221/./usr/share/applications/flash-player-properties.desktop	2012-03-04 12:43:46.581050586 +0200
+@@ -20,5 +20,5 @@
+ Terminal=false
+ Type=Application
+ StartupNotify=true
+-Categories=Settings;GNOME;GTK;X-GNOME-PersonalSettings;
++Categories=Settings;GTK;X-GNOME-PersonalSettings;
+ NotShowIn=KDE;
