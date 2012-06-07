@@ -31,10 +31,10 @@ Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://fpdownload.macromedia.com/get/flashplayer/pdc/11.2.202.235/install_flash_player_11_linux.i386.tar.gz
+Source0:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver32}/install_flash_player_11_linux.i386.tar.gz
 # NoSourceSource0-md5:	9f0e97cae13bae7a490b0505a543b373
 NoSource:	0
-Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/11.2.202.235/install_flash_player_11_linux.x86_64.tar.gz
+Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver64}/install_flash_player_11_linux.x86_64.tar.gz
 # NoSourceSource1-md5:	d508ebb81be22585bf79df75908247c7
 NoSource:	1
 %else
