@@ -34,7 +34,7 @@ Group:		X11/Applications/Multimedia
 Source0:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver32}/install_flash_player_11_linux.i386.tar.gz#/flash-%{version}.tgz
 # NoSourceSource0-md5:	9f0e97cae13bae7a490b0505a543b373
 NoSource:	0
-Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver64}/install_flash_player_11_linux.x86_64.tar.gz#/flash-%{version}.tgz
+Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver64}/install_flash_player_11_linux.x86_64.tar.gz#/flash64-%{version}.tgz
 # NoSourceSource1-md5:	d508ebb81be22585bf79df75908247c7
 NoSource:	1
 %else
