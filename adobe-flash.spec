@@ -4,8 +4,8 @@
 # Conditional build:
 %bcond_with	license_agreement	# generates package
 
-%define		ver32	11.2.202.236
-%define		ver64	11.2.202.236
+%define		ver32	11.2.202.238
+%define		ver64	11.2.202.238
 
 %ifarch %{ix86}
 %define		version	%{ver32}
