@@ -17,7 +17,7 @@
 %endif
 
 %define		base_name	adobe-flash
-%define		rel 1
+%define		rel 2
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
@@ -39,7 +39,7 @@ Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver64}/install_f
 NoSource:	1
 %else
 Source3:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
-# Source3-md5:	329c25f457fea66ec502b7ef70cb9ede
+# Source3-md5:	39dd73d36280769d0f74d642c7b0c6d3
 %endif
 Source2:	mms.cfg
 URL:		http://www.adobe.com/products/flashplayer/
@@ -112,9 +112,12 @@ sed -e '
 	s-@RELEASE@-%{release}-g
 	s,@SPECFILE@,%{_datadir}/%{base_name}/%{base_name}.spec,g
 	s,@DATADIR@,%{_datadir}/%{base_name},g
+	s,@COPYSOURCES@,mms.cfg desktop.patch,g
 ' %{SOURCE3} > $RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
 
 cp -p %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
+install %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/%{base_name}
+install %{PATCH0} $RPM_BUILD_ROOT%{_datadir}/%{base_name}
 
 %else
 
