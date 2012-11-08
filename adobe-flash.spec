@@ -4,8 +4,8 @@
 # Conditional build:
 %bcond_with	license_agreement	# generates package
 
-%define		ver32	11.2.202.243
-%define		ver64	11.2.202.243
+%define		ver32	11.2.202.251
+%define		ver64	11.2.202.251
 
 %ifarch %{ix86}
 %define		version	%{ver32}
@@ -17,7 +17,7 @@
 %endif
 
 %define		base_name	adobe-flash
-%define		rel 2
+%define		rel 1
 Summary:	Flash plugin for Netscape-compatible WWW browsers
 Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
