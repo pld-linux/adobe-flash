@@ -4,8 +4,8 @@
 # Conditional build:
 %bcond_with	license_agreement	# generates package
 
-%define		ver32	11.2.202.258
-%define		ver64	11.2.202.258
+%define		ver32	11.2.202.261
+%define		ver64	11.2.202.261
 
 %ifarch %{ix86}
 %define		version	%{ver32}
@@ -39,7 +39,7 @@ Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver64}/install_f
 NoSource:	1
 %else
 Source3:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
-# Source3-md5:	329c25f457fea66ec502b7ef70cb9ede
+# Source3-md5:	39dd73d36280769d0f74d642c7b0c6d3
 %endif
 Source2:	mms.cfg
 URL:		http://www.adobe.com/products/flashplayer/
