@@ -1,4 +1,5 @@
-#
+# NOTES:
+# - release archives: http://helpx.adobe.com/flash-player/kb/archived-flash-player-versions.html
 # TODO: package kde4 component
 #
 # Conditional build:
