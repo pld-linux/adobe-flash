@@ -117,16 +117,16 @@ sed -e '
 ' %{SOURCE3} > $RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
 
 cp -p %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
-install %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/%{base_name}
-install %{PATCH0} $RPM_BUILD_ROOT%{_datadir}/%{base_name}
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/%{base_name}
+cp -p %{PATCH0} $RPM_BUILD_ROOT%{_datadir}/%{base_name}
 
 %else
 
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_browserpluginsdir},%{_bindir},%{_desktopdir},%{_iconsdir}}
 cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/mms.cfg
 install -p *.so $RPM_BUILD_ROOT%{_browserpluginsdir}
-install usr/bin/flash-player-properties $RPM_BUILD_ROOT%{_bindir}
-install usr/share/applications/flash-player-properties.desktop $RPM_BUILD_ROOT%{_desktopdir}/flash-player-properties.desktop
+install -p usr/bin/flash-player-properties $RPM_BUILD_ROOT%{_bindir}
+cp -p usr/share/applications/flash-player-properties.desktop $RPM_BUILD_ROOT%{_desktopdir}/flash-player-properties.desktop
 cp -a usr/share/icons/* $RPM_BUILD_ROOT%{_iconsdir}
 %endif
 
