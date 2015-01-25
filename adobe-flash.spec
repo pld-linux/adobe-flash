@@ -56,6 +56,7 @@ Requires:	libcurl.so.4%{libmark}
 Requires:	rpm-build-tools >= 4.4.37
 Requires:	rpmbuild(macros) >= 1.544
 %endif
+Requires:	cpuinfo(sse2)
 Provides:	browser(flash)
 Provides:	macromedia-flash
 Obsoletes:	flash-plugin
