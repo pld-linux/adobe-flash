@@ -32,10 +32,10 @@ Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver32}/install_flash_player_11_linux.i386.tar.gz?/flash-%{version}.tgz
+Source0:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver32}/install_flash_player_11_linux.i386.tar.gz?/flash-%{version}.i386.tar.gz
 # NoSource0-md5:	3db563d8d2d73109f936e7e92f7b1782
 NoSource:	0
-Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver64}/install_flash_player_11_linux.x86_64.tar.gz?/flash64-%{version}.tgz
+Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver64}/install_flash_player_11_linux.x86_64.tar.gz?/flash-%{version}.x86_64.tar.gz
 # NoSource1-md5:	7e05effd150ab4430693e467e4c9c404
 NoSource:	1
 %else
@@ -155,6 +155,7 @@ fi
 %attr(755,root,root) %{_bindir}/%{base_name}.install
 %{_datadir}/%{base_name}
 %else
+%doc readme.txt
 %dir %{_sysconfdir}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mms.cfg
 %attr(755,root,root) %{_bindir}/flash-player-properties
