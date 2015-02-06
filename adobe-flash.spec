@@ -33,10 +33,10 @@ License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver32}/install_flash_player_11_linux.i386.tar.gz?/flash-%{version}.i386.tar.gz
-# NoSource0-md5:	f02ccf0435fa5aa77e77482e75ee2f8d
+# NoSource0-md5:	da2c00fb8d0685a9179d0979e9664b57
 NoSource:	0
 Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver64}/install_flash_player_11_linux.x86_64.tar.gz?/flash-%{version}.x86_64.tar.gz
-# NoSource1-md5:	a3dd4401313fa3863b46ad44827db0fd
+# NoSource1-md5:	ef2ab05d89b608a2ccb4e7142bc3154d
 NoSource:	1
 %else
 Source3:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
