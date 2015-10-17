@@ -5,15 +5,10 @@
 # Conditional build:
 %bcond_with	license_agreement	# generates package
 
-%define		ver32	11.2.202.540
-%define		ver64	11.2.202.540
-
 %ifarch %{ix86}
-%define		version	%{ver32}
 %define		libmark	%{nil}
 %endif
 %ifarch %{x8664}
-%define		version	%{ver64}
 %define		libmark	()(64bit)
 %endif
 
@@ -26,16 +21,16 @@ Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-Version:	%{version}
+Version:	11.2.202.540
 Release:	%{rel}%{?with_license_agreement:wla}
 Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver32}/install_flash_player_11_linux.i386.tar.gz?/flash-%{version}.i386.tar.gz
+Source0:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{version}/install_flash_player_11_linux.i386.tar.gz?/flash-%{version}.i386.tar.gz
 # NoSource0-md5:	6c16fe02dd4024a3067db346414f57d7
 NoSource:	0
-Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{ver64}/install_flash_player_11_linux.x86_64.tar.gz?/flash-%{version}.x86_64.tar.gz
+Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{version}/install_flash_player_11_linux.x86_64.tar.gz?/flash-%{version}.x86_64.tar.gz
 # NoSource1-md5:	8231c8b59499a56b2388d311b538c384
 NoSource:	1
 %else
