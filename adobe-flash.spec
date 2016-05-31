@@ -21,17 +21,17 @@ Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-Version:	11.2.202.616
+Version:	11.2.202.621
 Release:	%{rel}%{?with_license_agreement:wla}
 Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{version}/install_flash_player_11_linux.i386.tar.gz?/flash-%{version}.i386.tar.gz
-# NoSource0-md5:	489771efdee853e534d1025fba036f51
+# NoSource0-md5:	1a407f134211dd99c33867c38cecfd3f
 NoSource:	0
 Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{version}/install_flash_player_11_linux.x86_64.tar.gz?/flash-%{version}.x86_64.tar.gz
-# NoSource1-md5:	18271ef4389464f5236e415a8f140872
+# NoSource1-md5:	93b1d70ff91d6814677540f0700244a2
 NoSource:	1
 %else
 Source3:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
