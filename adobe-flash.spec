@@ -21,24 +21,27 @@ Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-Version:	11.2.202.643
+Version:	24.0.0.145
 Release:	%{rel}%{?with_license_agreement:wla}
 Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
-Source0:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{version}/install_flash_player_11_linux.i386.tar.gz?/flash-%{version}.i386.tar.gz
-# NoSource0-md5:	dd138cf72e62fbe69df5384d3e8396fc
+#Source0:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{version}/install_flash_player_11_linux.i386.tar.gz?/flash-%{version}.i386.tar.gz
+Source0:	https://fpdownload.macromedia.com/pub/labs/flashruntimes/flashplayer/linux32/flash_player_npapi_linux.i386.tar.gz?/flash-%{version}.i386.tar.gz
+# NoSource0-md5:	2014e0e08151e0af01c87b8e53d45202
 NoSource:	0
-Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{version}/install_flash_player_11_linux.x86_64.tar.gz?/flash-%{version}.x86_64.tar.gz
-# NoSource1-md5:	27b5026df9168a30fc4877159efad6e8
+#Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{version}/install_flash_player_11_linux.x86_64.tar.gz?/flash-%{version}.x86_64.tar.gz
+Source1:	https://fpdownload.macromedia.com/pub/labs/flashruntimes/flashplayer/linux64/flash_player_npapi_linux.x86_64.tar.gz?/flash-%{version}.x86_64.tar.gz
+# NoSource1-md5:	c3be1a2d50c38b253fc94b68fda52bcc
 NoSource:	1
 %else
 Source3:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
 # Source3-md5:	329c25f457fea66ec502b7ef70cb9ede
 %endif
 Source2:	mms.cfg
-URL:		http://www.adobe.com/products/flashplayer/
+#URL:		http://www.adobe.com/products/flashplayer/
+URL:		http://labs.adobe.com/downloads/flashplayer.html
 Patch0:		desktop.patch
 %if %{with license_agreement}
 BuildRequires:	rpmbuild(macros) >= 1.357
