@@ -21,7 +21,7 @@ Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-Version:	24.0.0.189
+Version:	25.0.0.119
 Release:	%{rel}%{?with_license_agreement:wla}
 Epoch:		1
 License:	Free to use, non-distributable
@@ -29,11 +29,11 @@ Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 #Source0:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{version}/install_flash_player_11_linux.i386.tar.gz?/flash-%{version}.i386.tar.gz
 Source0:	https://fpdownload.macromedia.com/pub/labs/flashruntimes/flashplayer/linux32/flash_player_npapi_linux.i386.tar.gz?/flash-%{version}.i386.tar.gz
-# NoSource0-md5:	4f803419c01d6384378245c25b507531
+# NoSource0-md5:	69abb8d461eeffb81c3ff1d2fc9bda4f
 NoSource:	0
 #Source1:	http://fpdownload.macromedia.com/get/flashplayer/pdc/%{version}/install_flash_player_11_linux.x86_64.tar.gz?/flash-%{version}.x86_64.tar.gz
 Source1:	https://fpdownload.macromedia.com/pub/labs/flashruntimes/flashplayer/linux64/flash_player_npapi_linux.x86_64.tar.gz?/flash-%{version}.x86_64.tar.gz
-# NoSource1-md5:	5fc293cd66e62a4f73c7c1946d337771
+# NoSource1-md5:	56a95b6b054b15f27a962dc17f9396d8
 NoSource:	1
 %else
 Source3:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
@@ -92,8 +92,8 @@ treści i aplikacji we Flashu pod Linuksem.
 %patch0 -p1
 
 %build
-s=$(echo 'LNX %{version}' | tr . ,)
-v=$(strings libflashplayer.so | grep '^LNX ')
+s=$(echo '%{version}' | tr . ,)
+v=$(strings libflashplayer.so | grep -m 1 'LNX ' | sed 's/.*LNX //')
 if [ "$v" != "$s" ]; then
 	: wrong version
 	exit 1
