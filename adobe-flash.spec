@@ -14,24 +14,24 @@
 
 %define		base_name	adobe-flash
 %define		rel 1
-Summary:	Flash plugin for Netscape-compatible WWW browsers
-Summary(pl.UTF-8):	Wtyczka Flash dla przeglądarek WWW zgodnych z Netscape
+Summary:	Flash (NPAPI based) plugin for Netscape-compatible WWW browsers
+Summary(pl.UTF-8):	Wtyczka Flash oparta na NPAPI dla przeglądarek WWW zgodnych z Netscape
 %if %{with license_agreement}
 Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-Version:	26.0.0.138
+Version:	26.0.0.143
 Release:	%{rel}%{?with_license_agreement:wla}
 Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	https://fpdownload.macromedia.com/pub/labs/flashruntimes/flashplayer/linux32/flash_player_npapi_linux.i386.tar.gz?/flash-%{version}.i386.tar.gz
-# NoSource0-md5:	573d207c94bfe659a40d71ccc1f015ce
+# NoSource0-md5:	918b2beb8864d2722f385a44b05ddb1e
 NoSource:	0
 Source1:	https://fpdownload.macromedia.com/pub/labs/flashruntimes/flashplayer/linux64/flash_player_npapi_linux.x86_64.tar.gz?/flash-%{version}.x86_64.tar.gz
-# NoSource1-md5:	3c027d19b20f64913e9daaaca28a66a6
+# NoSource1-md5:	828908cdb41a63dc1e107e653e1815a9
 NoSource:	1
 %else
 Source3:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
@@ -76,9 +76,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Adobe(R) Flash(R) Player for Linux - the next-generation client
 runtime for engaging with Flash content and applications on Linux.
 
+This package contains NPAPI based plugin.
+
 %description -l pl.UTF-8
 Adobe(R) Flash(R) Player - środowisko nowej generacji do obsługi
 treści i aplikacji we Flashu pod Linuksem.
+
+Ten pakiet zawiera wtyczkę opartą na NPAPI.
 
 %prep
 %if %{with license_agreement}
@@ -155,7 +159,7 @@ fi
 %dir %{_sysconfdir}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mms.cfg
 %attr(755,root,root) %{_bindir}/flash-player-properties
-%attr(755,root,root) %{_browserpluginsdir}/*.so
+%attr(755,root,root) %{_browserpluginsdir}/libflashplayer.so
 %{_desktopdir}/flash-player-properties.desktop
-%{_iconsdir}/hicolor/*/apps/*.png
+%{_iconsdir}/hicolor/*/apps/flash-player-properties.png
 %endif
