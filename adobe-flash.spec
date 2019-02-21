@@ -21,17 +21,17 @@ Name:		%{base_name}
 %else
 Name:		%{base_name}-installer
 %endif
-Version:	32.0.0.132
+Version:	32.0.0.150
 Release:	%{rel}%{?with_license_agreement:wla}
 Epoch:		1
 License:	Free to use, non-distributable
 Group:		X11/Applications/Multimedia
 %if %{with license_agreement}
 Source0:	https://fpdownload.macromedia.com/pub/labs/flashruntimes/flashplayer/linux32/flash_player_npapi_linux.i386.tar.gz?/flash-%{version}.i386.tar.gz
-# NoSource0-md5:	f9522a3700f9ebc23b96ebeb07872885
+# NoSource0-md5:	7bc8f456ce9d8af5342d76bea5eaf46a
 NoSource:	0
 Source1:	https://fpdownload.macromedia.com/pub/labs/flashruntimes/flashplayer/linux64/flash_player_npapi_linux.x86_64.tar.gz?/flash-%{version}.x86_64.tar.gz
-# NoSource1-md5:	7d32b8e08e5b1ef6de83b428b986c00e
+# NoSource1-md5:	e0ce8d632ec28f60b33bab243793d884
 NoSource:	1
 %else
 Source3:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
